@@ -59,10 +59,10 @@ Logo: la sagoma reale del Campo dei Fiori vista da Varese, ricavata dai dati alt
 Tutto rispetta: testo fermo e leggibile dal primo frame, risposte entro 200ms, entrate e transizioni entro 600ms, 800ms solo per i momenti d'autore, un solo effetto legato allo scroll per pagina, scroll nativo. Con `prefers-reduced-motion` tutto è fermo e completo; sotto i 768px restano solo il momento dell'hero e le risposte.
 
 - **Entrate** (`src/components/site/Reveal.tsx` + `index.css`): in CSS, opacità e 16px, 600ms, una volta, cascata di 80ms su massimo sei elementi; rete di sicurezza dopo 2,5s, così il contenuto non resta mai nascosto.
-- **Home**: le foto del collage si aprono con una maschera (800ms, 120ms tra una e l'altra) e il crinale si traccia sotto il titolo; la foto principale scende più lenta della pagina; l'anteprima dei percorsi cambia foto con la voce aperta.
+- **Home**: hero "sotto le chiome" (`src/components/site/CanopyHero.tsx`): si guarda in su tra gli alberi, la foto entra al caricamento (800ms) e scorrendo si sale sopra le chiome (la foto si ingrandisce e sfuma nel cielo, unico effetto di scroll della Home). Concetto ispirato a "Overstory Studio Landing" di kedhar-components (codice non pubblicato, quindi riscritto da zero). Poi la frase d'apertura con piccole foto nel testo, i quattro tratti, l'anteprima dei percorsi che cambia foto con la voce aperta.
 - **Luoghi**: rilievo 3D reale (three.js caricato a parte, solo desktop con WebGL), trascinamento o frecce per ruotare, lo scroll fa girare il punto di vista; altrove immagine statica `src/assets/terrain/rilievo-statico.webp`.
 - **Chi sono**: profilo altimetrico del Sentiero Italia che si disegna con lo scroll.
-- **Camminate di ascolto**: linea della timeline che segue lo scroll.
+- **Camminate di ascolto**: sentiero della timeline sempre visibile, il "camminatore" che avanza con lo scroll e le tappe che si accendono al suo passaggio.
 - **Giornate e ritiri**: il sole attraversa l'arco mentre si scorre il programma.
 - **Percorsi, Percorsi individuali, Date**: parallasse leggera sulle foto. **Contatti**: crinale che scorre nell'intestazione.
 - **Gallerie**: apertura a schermo intero con scorrimento (frecce, tastiera, trascinamento).

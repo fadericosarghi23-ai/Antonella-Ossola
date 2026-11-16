@@ -1,10 +1,11 @@
-import { useRef, useState, type CSSProperties } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowUpRight, Footprints, MessageCircle, Phone, Sunrise, UserRound, Users, Leaf, Mountain } from 'lucide-react'
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import EditorialServiceList from '@/components/ui/editorial-service-list'
 import { Photo } from '@/components/site/Photo'
+import { CanopyHero } from '@/components/site/CanopyHero'
 import { CtaBand, Section } from '@/components/site/blocks'
 import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
 import { Ph } from '@/components/site/Ph'
@@ -12,10 +13,11 @@ import { CRINALE } from '@/components/brand/Logo'
 import { photos, type PhotoSrc } from '@/lib/photos'
 import { percorsi, SITE_URL, contatti } from '@/lib/site'
 import { useSeo } from '@/hooks/use-seo'
-import { useDesktop } from '@/hooks/use-desktop'
 import meta from '@/lib/routes-meta.json'
 import rilievo from '@/assets/terrain/rilievo-statico.webp'
-import profilo from '@/assets/terrain/rilievo.json'
+import pillGruppo from '@/assets/photos/gruppo-bosco-xs.webp'
+import pillMuschio from '@/assets/photos/muschio-xs.webp'
+import pillLago from '@/assets/photos/lago-colline-xs.webp'
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -56,180 +58,105 @@ const fotoPercorso: Record<string, PhotoSrc> = {
   'giornate-e-ritiri': photos.albaLago,
 }
 
+
 const luoghiTeaser = [
   { n: 1, nome: 'Valle del Lanza', nota: 'Mulini e cave di Molera', photo: photos.ruscello },
   { n: 2, nome: 'Valle del Bevera', nota: 'Un torrente e il suo bosco', photo: photos.sentieroVerde },
   { n: 4, nome: 'Monte Sette Termini', nota: 'Sul Sentiero Italia, verso Luino', photo: photos.lagoDallAlto },
 ]
 
-// mini profilo del Sentiero Italia per la scheda dell'hero (quote SRTM, indicativo)
-const miniProfilo = (() => {
-  const pts = profilo.profilo
-  const kmMax = pts[pts.length - 1][0]
-  return pts
-    .map(([km, q], i) => `${i ? 'L' : 'M'}${((km / kmMax) * 200).toFixed(1)},${(52 - ((q - 180) / 820) * 48).toFixed(1)}`)
-    .join(' ')
-})()
 
-/** Foto principale dell'hero: scende più lenta della pagina (unico effetto di scroll della Home). */
-function ParallaxHero({ target, children }: { target: React.RefObject<HTMLElement | null>; children: React.ReactNode }) {
-  const reduce = useReducedMotion()
-  const desktop = useDesktop()
-  const { scrollYProgress } = useScroll({ target, offset: ['start start', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '10%'])
-  return (
-    <motion.div className="h-full w-full" style={reduce || !desktop ? undefined : { y, scale: 1.06 }}>
-      {children}
-    </motion.div>
-  )
-}
 
 export default function Home() {
   useSeo({ ...meta['/'], path: '/', jsonLd })
-  const heroRef = useRef<HTMLElement>(null)
   const [aperto, setAperto] = useState(0)
   const attivo = percorsi[aperto] ?? percorsi[0]
 
   return (
     <>
-      {/* HERO editoriale: titolo deciso a sinistra, collage di foto a destra che si apre al caricamento */}
-      <section ref={heroRef} className="container-site grid items-center gap-10 pt-8 pb-14 md:grid-cols-12 md:gap-8 md:pt-12 md:pb-20 lg:min-h-[calc(100svh-4rem)]">
-        <div className="md:col-span-6 lg:pr-6">
-          <p className="kicker">
-            <Ph>Varese · Psicologa e camminatrice</Ph>
-          </p>
-          <h1 className="mt-5 text-[3.1rem] leading-[0.98] text-bosco sm:text-7xl md:text-[4.6rem] lg:text-[5.4rem]">
-            <Ph>Camminare per tornare a sentirsi.</Ph>
-          </h1>
-          <svg viewBox="0 0 92 44" className="crinale-traccia mt-6 h-8 w-20 text-castagno" aria-hidden="true">
-            <path d={CRINALE} pathLength={1} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <p className="mt-5 max-w-lg text-lg text-muted-foreground md:text-xl">
-            <Ph>
-              Percorsi lenti nei boschi e lungo i laghi della provincia di Varese, con una psicologa che conosce i
-              sentieri.
-            </Ph>
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg">
-              <Link to="/percorsi">
-                Scopri i percorsi <ArrowRight />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-bosco/25 bg-transparent hover:bg-card">
-              <Link to="/date">Lista d’attesa 2027</Link>
-            </Button>
-          </div>
-          <ul className="mt-10 grid gap-2 border-t pt-5 sm:grid-cols-3">
-            {percorsi.map((p) => {
-              const Icon = iconaPercorso[p.slug as keyof typeof iconaPercorso]
-              return (
-                <li key={p.slug}>
-                  <Link
-                    to={p.href}
-                    className="group flex items-center gap-2.5 rounded-lg py-1.5 text-sm text-bosco transition-colors duration-150 hover:text-castagno"
-                  >
-                    <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-pietra transition-colors duration-150 group-hover:bg-castagno group-hover:text-carta">
-                      <Icon className="size-4" aria-hidden="true" />
-                    </span>
-                    <span className="leading-tight">{p.nome}</span>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
+      {/* HERO "sotto le chiome": si guarda in su tra gli alberi; scorrendo si sale sopra le chiome */}
+      <CanopyHero photo={photos.chiome}>
+        <p className="inline-flex items-center gap-2 rounded-full border border-bosco/10 bg-carta/85 px-4 py-1.5 text-sm text-bosco shadow-sm backdrop-blur">
+          <span aria-hidden="true" className="size-2 rounded-full bg-castagno" />
+          <Ph>Lista d’attesa aperta · prime uscite nel 2027</Ph>
+        </p>
+        <h1 className="mt-6 max-w-4xl text-[3rem] leading-[0.98] text-bosco sm:text-7xl md:text-[5.6rem]">
+          <Ph>Camminare per tornare a sentirsi.</Ph>
+        </h1>
+        <svg viewBox="0 0 92 44" className="crinale-traccia mt-5 h-7 w-16 text-castagno" aria-hidden="true">
+          <path d={CRINALE} pathLength={1} fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <p className="mt-4 max-w-xl text-lg text-bosco/80 md:text-xl">
+          <Ph>Percorsi lenti nei boschi e lungo i laghi della provincia di Varese, con una psicologa che conosce i sentieri.</Ph>
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Button asChild size="lg">
+            <Link to="/percorsi">
+              Scopri i percorsi <ArrowRight />
+            </Link>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="border-bosco/20 bg-carta/80 backdrop-blur hover:bg-carta">
+            <Link to="/date">Entra nella lista d’attesa</Link>
+          </Button>
         </div>
+        <ul className="mt-8 hidden flex-wrap justify-center gap-x-6 gap-y-2 rounded-full border border-bosco/10 bg-carta/85 px-6 py-2.5 shadow-sm backdrop-blur sm:flex">
+          {percorsi.map((p) => {
+            const Icon = iconaPercorso[p.slug as keyof typeof iconaPercorso]
+            return (
+              <li key={p.slug}>
+                <Link to={p.href} className="group flex items-center gap-2 text-[0.95rem] text-bosco transition-colors duration-150 hover:text-castagno">
+                  <Icon className="size-4 text-castagno" aria-hidden="true" />
+                  <span className="underline decoration-transparent underline-offset-4 transition-colors duration-150 group-hover:decoration-castagno">{p.nome}</span>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      </CanopyHero>
 
-        <div className="relative h-[420px] sm:h-[520px] md:col-span-6 md:h-[600px] lg:h-[660px]">
-          <div className="collage-foto absolute top-0 right-0 h-[80%] w-[80%] overflow-hidden rounded-[2rem]" style={{ '--d': '0ms' } as CSSProperties}>
-            <ParallaxHero target={heroRef}>
-              <Photo photo={photos.hero} priority sizes="(min-width: 768px) 45vw, 80vw" className="h-full w-full" imgClassName="object-[60%_55%]" />
-            </ParallaxHero>
-          </div>
-          <div
-            className="collage-foto absolute bottom-0 left-0 h-[52%] w-[46%] overflow-hidden rounded-[1.6rem] border-[6px] border-background"
-            style={{ '--d': '120ms' } as CSSProperties}
-          >
-            <Photo photo={photos.gruppo} priority sizes="(min-width: 768px) 22vw, 46vw" className="h-full w-full" imgClassName="object-[50%_40%]" />
-          </div>
-          <div
-            className="collage-foto absolute top-[6%] left-[4%] hidden h-[26%] w-[22%] overflow-hidden rounded-[1.2rem] border-[5px] border-background sm:block"
-            style={{ '--d': '240ms' } as CSSProperties}
-          >
-            <Photo photo={photos.muschio} sizes="12vw" className="h-full w-full" />
-          </div>
-          {/* scheda ferma (testo leggibile dal primo frame): il Sentiero Italia citato da Antonella */}
-          <Link
-            to="/luoghi"
-            className="group absolute right-2 bottom-3 w-[54%] rounded-2xl border bg-card/95 p-4 shadow-[0_18px_40px_-20px_rgb(30_38_32/0.45)] backdrop-blur transition-transform duration-200 hover:-translate-y-0.5 sm:right-4 sm:bottom-6 sm:p-5"
-          >
-            <p className="kicker flex items-center gap-1.5">
-              <Mountain className="size-3.5" aria-hidden="true" /> Sentiero Italia
+      {/* (01) SOPRA LE CHIOME: frase d'apertura con piccole foto nel testo e quattro tratti */}
+      <section className="bg-[linear-gradient(to_bottom,var(--carta),var(--carta))] pt-8 pb-16 md:pb-24">
+        <div className="container-site">
+          <Reveal>
+            <p className="flex items-center gap-3 text-sm text-muted-foreground">
+              <span className="font-medium text-castagno">( 01 )</span> Sopra le chiome
             </p>
-            <p className="mt-1.5 font-display text-lg leading-snug text-bosco sm:text-xl">Da Porto Ceresio a Luino</p>
-            <svg viewBox="0 0 200 56" className="mt-2 h-10 w-full" aria-hidden="true">
-              <path d={`${miniProfilo} L200,56 L0,56 Z`} fill="var(--muschio)" fillOpacity="0.15" />
-              <path d={miniProfilo} fill="none" stroke="var(--castagno)" strokeWidth="1.8" strokeLinejoin="round" />
-            </svg>
-            <p className="mt-1 flex items-center justify-between text-xs text-muted-foreground">
-              Tra il lago di Lugano e il Maggiore
-              <ArrowUpRight className="size-4 text-castagno transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <p className="mt-6 max-w-5xl font-display text-[1.9rem] leading-[1.18] text-bosco md:text-[3.1rem]">
+              <Ph>
+                Non serve essere escursionisti esperti. <span className="mx-1 inline-block h-[0.82em] w-[1.9em] translate-y-[0.08em] overflow-hidden rounded-full align-baseline"><img src={pillGruppo} alt="Un piccolo gruppo sul sentiero" className="h-full w-full object-cover" loading="lazy" /></span> Si cammina piano, su
+                sentieri poco frequentati, <span className="mx-1 inline-block h-[0.82em] w-[1.9em] translate-y-[0.08em] overflow-hidden rounded-full align-baseline"><img src={pillMuschio} alt="Muschio nel sottobosco" className="h-full w-full object-cover" loading="lazy" /></span> e ci si concede il tempo per ascoltare
+                quello che di solito resta in sottofondo. <span className="mx-1 inline-block h-[0.82em] w-[1.9em] translate-y-[0.08em] overflow-hidden rounded-full align-baseline"><img src={pillLago} alt="Lago tra le colline" className="h-full w-full object-cover" loading="lazy" /></span>
+              </Ph>
             </p>
-          </Link>
-        </div>
-      </section>
-
-      {/* L'IDEA: foto, testo, tre tratti del modo di camminare e citazione */}
-      <section className="bg-pietra/60 py-14 md:py-20">
-        <div className="container-site grid items-center gap-10 md:grid-cols-12 md:gap-12">
-          <RevealImage className="relative aspect-[4/5] rounded-[2rem] md:col-span-5">
-            <Photo photo={photos.luceBosco} sizes="(min-width: 768px) 40vw, 100vw" className="h-full w-full" imgClassName="object-[45%_50%]" />
-          </RevealImage>
-          <div className="md:col-span-7">
-            <Reveal>
-              <p className="kicker">L’idea</p>
-              <h2 className="mt-4 text-4xl leading-[1.04] md:text-6xl">
-                <Ph>Il bosco come stanza, il passo come ritmo.</Ph>
-              </h2>
-              <div className="mt-6 grid gap-5 text-lg text-muted-foreground lg:grid-cols-2">
-                <Ph as="p">
-                  Non serve essere escursionisti esperti. Si cammina piano, su sentieri scelti perché poco frequentati, e
-                  ci si concede del tempo per ascoltare quello che di solito resta in sottofondo.
-                </Ph>
-                <Ph as="p">
-                  Antonella unisce due cose che conosce bene: l’ascolto, per formazione, e la montagna di casa, per
-                  passione.
-                </Ph>
-              </div>
-            </Reveal>
-            <ul className="mt-8 grid gap-3 sm:grid-cols-3">
-              {[
-                { Icon: Leaf, t: 'Passo lento', d: 'Si cammina senza fretta' },
-                { Icon: Users, t: 'Gruppi piccoli', d: 'Poche persone alla volta' },
-                { Icon: Mountain, t: 'Sentieri tranquilli', d: 'Lontano dai più battuti' },
-              ].map(({ Icon, t, d }, i) => (
-                <li key={t} className="list-none">
-                  <Reveal delay={stagger(i + 1)} className="h-full rounded-2xl bg-background/80 p-4">
-                    <Icon className="size-5 text-castagno" aria-hidden="true" />
-                    <p className="mt-2 font-display text-xl text-bosco">{t}</p>
-                    <Ph as="p" className="text-sm text-muted-foreground">
-                      {d}
-                    </Ph>
-                  </Reveal>
-                </li>
-              ))}
-            </ul>
-            <Reveal delay={stagger(2)}>
-              <figure className="mt-8 border-l-2 border-castagno pl-5">
-                <blockquote className="font-display text-2xl leading-snug text-bosco md:text-3xl">
-                  “Ritornare alla natura fa bene al corpo e alla psiche.”
-                </blockquote>
-                <figcaption className="mt-2 text-sm text-muted-foreground">
-                  Antonella Ossola, intervista a <cite>Il Giorno</cite>, maggio 2020
-                </figcaption>
-              </figure>
-            </Reveal>
+          </Reveal>
+          <div className="mt-12 grid gap-x-10 sm:grid-cols-2">
+            {[
+              { Icon: Leaf, t: 'Passo lento', d: 'Si cammina senza fretta, con soste per ascoltare.' },
+              { Icon: Users, t: 'Gruppi piccoli', d: 'Poche persone alla volta, per restare in ascolto.' },
+              { Icon: Mountain, t: 'Sentieri tranquilli', d: 'Lontano dai percorsi più battuti della provincia.' },
+              { Icon: UserRound, t: 'Una psicologa accanto', d: 'L’ascolto per formazione, la montagna per passione.' },
+            ].map(({ Icon, t, d }, i) => (
+              <Reveal key={t} delay={stagger(i)} className="flex items-start gap-4 border-t py-6">
+                <Icon className="mt-1 size-6 shrink-0 text-castagno" aria-hidden="true" />
+                <div>
+                  <p className="font-display text-3xl text-bosco md:text-4xl">{t}</p>
+                  <Ph as="p" className="mt-1 text-muted-foreground">
+                    {d}
+                  </Ph>
+                </div>
+              </Reveal>
+            ))}
           </div>
+          <Reveal className="mt-10">
+            <figure className="border-l-2 border-castagno pl-5">
+              <blockquote className="font-display text-2xl leading-snug text-bosco md:text-3xl">
+                “Ritornare alla natura fa bene al corpo e alla psiche.”
+              </blockquote>
+              <figcaption className="mt-2 text-sm text-muted-foreground">
+                Antonella Ossola, intervista a <cite>Il Giorno</cite>, maggio 2020
+              </figcaption>
+            </figure>
+          </Reveal>
         </div>
       </section>
 

@@ -2,6 +2,8 @@
   [SEGNAPOSTO] Tutte le foto sono provvisorie, da Unsplash (licenza Unsplash, uso libero).
   Vanno sostituite con foto reali dei percorsi di Antonella. Crediti in /crediti-foto.txt
 */
+import heroChiome from '@/assets/photos/hero-chiome.webp'
+import heroChiomeSm from '@/assets/photos/hero-chiome-sm.webp'
 import heroNebbia from '@/assets/photos/hero-nebbia-calda.webp'
 import heroNebbiaSm from '@/assets/photos/hero-nebbia-calda-sm.webp'
 import gruppoBosco from '@/assets/photos/gruppo-bosco.webp'
@@ -34,6 +36,7 @@ import sentieroVerdeSm from '@/assets/photos/sentiero-verde-sm.webp'
 export type PhotoSrc = { src: string; sm: string; w: number; h: number; alt: string }
 
 export const photos = {
+  chiome: { src: heroChiome, sm: heroChiomeSm, w: 1870, h: 1052, alt: 'Chiome degli alberi viste dal basso, con il cielo al centro' },
   hero: { src: heroNebbia, sm: heroNebbiaSm, w: 2200, h: 1467, alt: 'Bosco di abeti nella nebbia del mattino' },
   gruppo: { src: gruppoBosco, sm: gruppoBoscoSm, w: 1600, h: 2400, alt: 'Un piccolo gruppo cammina su un sentiero nel bosco' },
   bivio: { src: bivio, sm: bivioSm, w: 1600, h: 1071, alt: 'Un sentiero nel bosco che si divide in due' },
