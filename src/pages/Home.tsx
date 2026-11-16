@@ -75,7 +75,7 @@ export default function Home() {
   return (
     <>
       {/* HERO "sotto le chiome": si guarda in su tra gli alberi; scorrendo si sale sopra le chiome */}
-      <CanopyHero photo={photos.chiome} above={photos.lagoColline}>
+      <CanopyHero photo={photos.chiome}>
         <p className="inline-flex items-center gap-2 rounded-full border border-bosco/10 bg-carta/85 px-4 py-1.5 text-sm text-bosco shadow-sm backdrop-blur">
           <span aria-hidden="true" className="size-2 rounded-full bg-castagno" />
           <Ph>Lista d’attesa aperta · prime uscite nel 2027</Ph>

@@ -9,38 +9,23 @@ import type { PhotoSrc } from '@/lib/photos'
   kedhar-components: il codice originale non è pubblicato né licenziato, quindi non è stato copiato).
   - Primo frame: si guarda in su tra le chiome, titolo al centro sul cielo, fermo e leggibile.
   - Al caricamento la foto entra con dissolvenza e rientro di scala (800ms, solo immagine).
-  - Scorrendo si "sale sopra gli alberi": le chiome si ingrandiscono e sfumano, e sotto si apre il
-    panorama (lago e colline) che si assesta. Unico effetto di scroll della Home, scroll nativo con
-    contenitore sticky. Il testo non si anima mai: resta leggibile su chiome e panorama.
+  - Una sola foto. Scorrendo si sale verso il varco di cielo: le chiome si ingrandiscono piano
+    (da 1 a 1,4) e restano sempre piene, così la scena non si svuota. Unico effetto di scroll della
+    Home, scroll nativo con contenitore sticky. Il testo non si anima mai.
   - Mobile e prefers-reduced-motion: un'altezza di schermo, foto ferma.
 */
-export function CanopyHero({ photo, above, children }: { photo: PhotoSrc; above: PhotoSrc; children: ReactNode }) {
+export function CanopyHero({ photo, children }: { photo: PhotoSrc; children: ReactNode }) {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
   const desktop = useDesktop()
   const active = desktop && !reduce
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 2.1])
-  const opacity = useTransform(scrollYProgress, [0.2, 0.8], [1, 0])
-  const aboveScale = useTransform(scrollYProgress, [0, 1], [1.25, 1])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.4])
 
   return (
-    <section ref={ref} className={`relative -mt-16 md:-mt-[78px] ${active ? 'h-[210vh]' : 'h-[100svh] min-h-[640px]'}`}>
+    <section ref={ref} className={`relative -mt-16 md:-mt-[78px] ${active ? 'h-[160vh]' : 'h-[100svh] min-h-[640px]'}`}>
       <div className="sticky top-0 h-[100svh] min-h-[640px] overflow-hidden bg-bosco">
-        {active && (
-          <motion.div className="absolute inset-0" style={{ scale: aboveScale }}>
-            <img
-              src={above.src}
-              srcSet={`${above.sm} 800w, ${above.src} ${above.w}w`}
-              sizes="100vw"
-              alt=""
-              fetchPriority="low"
-              decoding="async"
-              className="h-full w-full object-cover object-[50%_55%]"
-            />
-          </motion.div>
-        )}
-        <motion.div className="chiome-in absolute inset-0" style={active ? { scale, opacity } : undefined}>
+        <motion.div className="chiome-in absolute inset-0" style={active ? { scale } : undefined}>
           <img
             src={photo.src}
             srcSet={`${photo.sm} 800w, ${photo.src} ${photo.w}w`}
