@@ -23,7 +23,7 @@ export function CanopyHero({ photo, children }: { photo: PhotoSrc; children: Rea
   const opacity = useTransform(scrollYProgress, [0.25, 0.95], [1, 0])
 
   return (
-    <section ref={ref} className={`relative -mt-16 ${active ? 'h-[210vh]' : 'h-[100svh] min-h-[640px]'}`}>
+    <section ref={ref} className={`relative -mt-16 md:-mt-[78px] ${active ? 'h-[210vh]' : 'h-[100svh] min-h-[640px]'}`}>
       <div className="sticky top-0 h-[100svh] min-h-[640px] overflow-hidden bg-[linear-gradient(to_bottom,#cfdbe0_0%,#e3e7e2_55%,var(--carta)_100%)]">
         <motion.div className="chiome-in absolute inset-0" style={active ? { scale, opacity } : undefined}>
           <img
@@ -36,14 +36,10 @@ export function CanopyHero({ photo, children }: { photo: PhotoSrc; children: Rea
             className="h-full w-full object-cover object-center"
           />
         </motion.div>
-        {/* velature: leggibilità dell'header in alto e del titolo al centro */}
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-carta/85 to-transparent" />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_48%_42%_at_50%_52%,rgb(243_239_230/0.78),rgb(243_239_230/0.35)_55%,transparent_80%)]"
-        />
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-carta" />
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 pt-16 text-center">{children}</div>
+        {/* nessuna velatura sulla foto: titolo e testo chiari con un'ombra scura morbida (in Home.tsx) */}
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 pt-16 text-center">
+          {children}
+        </div>
         <p className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 items-center gap-3 rounded-full bg-carta/85 px-5 py-2 text-[0.72rem] font-medium tracking-[0.2em] whitespace-nowrap text-bosco uppercase shadow-sm backdrop-blur md:flex">
           <span aria-hidden="true" className="h-px w-10 bg-bosco/40" />
           Scorri per salire sopra gli alberi

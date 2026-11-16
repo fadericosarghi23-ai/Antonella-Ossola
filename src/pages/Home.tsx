@@ -80,13 +80,13 @@ export default function Home() {
           <span aria-hidden="true" className="size-2 rounded-full bg-castagno" />
           <Ph>Lista d’attesa aperta · prime uscite nel 2027</Ph>
         </p>
-        <h1 className="mt-6 max-w-4xl text-[3rem] leading-[0.98] text-bosco sm:text-7xl md:text-[5.6rem]">
+        <h1 className="mt-6 max-w-4xl text-[3rem] leading-[0.98] text-carta [text-shadow:0_2px_24px_rgb(20_28_22/0.55),0_1px_3px_rgb(20_28_22/0.45)] sm:text-7xl md:text-[5.6rem]">
           <Ph>Camminare per tornare a sentirsi.</Ph>
         </h1>
-        <svg viewBox="0 0 92 44" className="crinale-traccia mt-5 h-7 w-16 text-castagno" aria-hidden="true">
+        <svg viewBox="0 0 92 44" className="crinale-traccia mt-5 h-7 w-16 text-carta" aria-hidden="true">
           <path d={CRINALE} pathLength={1} fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <p className="mt-4 max-w-xl text-lg text-bosco/80 md:text-xl">
+        <p className="mt-4 max-w-xl text-lg font-medium text-carta [text-shadow:0_2px_24px_rgb(20_28_22/0.55),0_1px_3px_rgb(20_28_22/0.45)] md:text-xl">
           <Ph>Percorsi lenti nei boschi e lungo i laghi della provincia di Varese, con una psicologa che conosce i sentieri.</Ph>
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">

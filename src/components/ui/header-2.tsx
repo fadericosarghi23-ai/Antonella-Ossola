@@ -50,7 +50,7 @@ export function Header() {
 	return (
 		<header
 			className={cn(
-				'sticky top-0 z-50 mx-auto w-full max-w-6xl border-b border-transparent md:rounded-full md:border md:border-transparent md:transition-[top,max-width,background-color,border-color,box-shadow] md:duration-300 md:ease-out',
+				'sticky top-0 z-50 mx-auto w-full max-w-6xl border-b border-border/60 bg-background/90 backdrop-blur-md md:top-3 md:mt-3 md:rounded-full md:border md:border-border/60 md:shadow-sm md:transition-[top,max-width,background-color,border-color,box-shadow] md:duration-300 md:ease-out',
 				{
 					'bg-background/95 supports-[backdrop-filter]:bg-background/80 border-border backdrop-blur-md md:top-3 md:max-w-4xl md:border-border md:shadow-sm':
 						scrolled && !open,
