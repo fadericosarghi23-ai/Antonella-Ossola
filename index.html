@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Antonella Ossola · Percorsi in natura a Varese con una psicologa</title>
+    <meta name="description" content="Camminate di ascolto, percorsi individuali e giornate nei boschi e lungo i laghi della provincia di Varese, guidati da Antonella Ossola, psicologa." />
+    <!-- BOZZA: togliere noindex alla messa online definitiva (anche in netlify.toml) -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="https://antonellaossola.it/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#F3EFE6" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content="Antonella Ossola" />
+    <meta property="og:title" content="Antonella Ossola · Percorsi in natura a Varese con una psicologa" />
+    <meta property="og:description" content="Camminate di ascolto, percorsi individuali e giornate nei boschi e lungo i laghi della provincia di Varese, guidati da Antonella Ossola, psicologa." />
+    <meta property="og:url" content="https://antonellaossola.it/" />
+    <meta property="og:image" content="https://antonellaossola.it/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="padding:2rem;font-family:Georgia,serif">
+        Antonella Ossola, percorsi in natura a Varese. Per contatti scrivi a info@antonellaossola.it.
+      </p>
+    </noscript>
+    <!-- Moduli statici nascosti: servono a Netlify Forms per rilevare i campi in fase di build -->
+    <form name="richiesta" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" /><input name="percorso" /><input name="periodo" /><input name="persone" />
+      <input name="esperienza" /><input name="nome" /><input name="email" /><input name="telefono" />
+      <textarea name="messaggio"></textarea><input name="consenso" />
+    </form>
+    <form name="lista-attesa" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" /><input name="nome" /><input name="email" /><input name="interesse" /><input name="consenso" />
+    </form>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

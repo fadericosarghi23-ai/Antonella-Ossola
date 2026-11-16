@@ -1,0 +1,46 @@
+{
+  "/": {
+    "title": "Antonella Ossola · Percorsi in natura a Varese con una psicologa",
+    "description": "Camminate di ascolto, percorsi individuali e giornate nei boschi e lungo i laghi della provincia di Varese, guidati da Antonella Ossola, psicologa."
+  },
+  "/percorsi": {
+    "title": "Percorsi in natura a Varese · Antonella Ossola",
+    "description": "Tre modi di camminare nei boschi della provincia di Varese: camminate di ascolto in gruppo, percorsi individuali, giornate e ritiri."
+  },
+  "/percorsi/camminate-di-ascolto": {
+    "title": "Camminate di ascolto in gruppo a Varese · Antonella Ossola",
+    "description": "Mezza giornata a passo lento nei boschi del Varesotto, in piccolo gruppo, con momenti di silenzio e di condivisione guidati da una psicologa."
+  },
+  "/percorsi/percorsi-individuali": {
+    "title": "Percorsi individuali in natura a Varese · Antonella Ossola",
+    "description": "Incontri a due camminando nei boschi della provincia di Varese: uno spazio riservato per fermarsi su una domanda, con una psicologa."
+  },
+  "/percorsi/giornate-e-ritiri": {
+    "title": "Giornate e ritiri in natura a Varese · Antonella Ossola",
+    "description": "Una giornata o un fine settimana nei boschi e sui laghi del Varesotto: cammino, pause, scrittura e un pasto condiviso."
+  },
+  "/luoghi": {
+    "title": "I luoghi dei percorsi in provincia di Varese · Antonella Ossola",
+    "description": "Valle del Lanza, Valle del Bevera, Sentiero Italia e Monte Sette Termini: i sentieri meno frequentati della provincia di Varese."
+  },
+  "/chi-sono": {
+    "title": "Chi sono · Antonella Ossola, psicologa e camminatrice a Varese",
+    "description": "Antonella Ossola, psicologa, da anni sui sentieri della provincia di Varese. Perché ha scelto di unire l’ascolto e il cammino."
+  },
+  "/date": {
+    "title": "Date e lista d’attesa · Percorsi in natura a Varese",
+    "description": "Le prime uscite sono in preparazione. Lascia il tuo nome nella lista d’attesa per ricevere per primo le date dei percorsi a Varese."
+  },
+  "/contatti": {
+    "title": "Contatti · Antonella Ossola, percorsi in natura a Varese",
+    "description": "Scrivi ad Antonella Ossola per informazioni sui percorsi in natura in provincia di Varese: richiesta guidata in tre passi, email o WhatsApp."
+  },
+  "/privacy": {
+    "title": "Informativa privacy · Antonella Ossola",
+    "description": "Come vengono trattati i dati personali raccolti dal sito di Antonella Ossola."
+  },
+  "/cookie": {
+    "title": "Cookie · Antonella Ossola",
+    "description": "Il sito di Antonella Ossola non usa cookie di profilazione né strumenti di statistica."
+  }
+}

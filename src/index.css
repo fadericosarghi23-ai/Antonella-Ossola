@@ -1,0 +1,143 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@fontsource-variable/fraunces/full.css";
+@import "@fontsource/instrument-sans/400.css";
+@import "@fontsource/instrument-sans/500.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Identità Antonella Ossola
+  Carta #F3EFE6 · Pietra #E4DED0 · Muschio #6B7558 · Bosco #1E2620 · Castagno #8C4A2F (unico accento)
+*/
+:root {
+  --carta: #f3efe6;
+  --pietra: #e4ded0;
+  --muschio: #6b7558;
+  --muschio-scuro: #4f5841;
+  --bosco: #1e2620;
+  --castagno: #8c4a2f;
+  --castagno-scuro: #723b24;
+
+  --radius: 0.75rem;
+  --background: var(--carta);
+  --foreground: var(--bosco);
+  --card: #f8f5ee;
+  --card-foreground: var(--bosco);
+  --popover: #f8f5ee;
+  --popover-foreground: var(--bosco);
+  --primary: var(--castagno);
+  --primary-foreground: #f8f4ec;
+  --secondary: var(--pietra);
+  --secondary-foreground: var(--bosco);
+  --muted: var(--pietra);
+  --muted-foreground: #4c5546;
+  --accent: #e9e3d6;
+  --accent-foreground: var(--bosco);
+  --destructive: #a3362a;
+  --border: #d9d2c3;
+  --input: #cfc7b6;
+  --ring: var(--castagno);
+}
+
+@theme inline {
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces Variable", Georgia, serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-carta: var(--carta);
+  --color-pietra: var(--pietra);
+  --color-muschio: var(--muschio);
+  --color-muschio-scuro: var(--muschio-scuro);
+  --color-bosco: var(--bosco);
+  --color-castagno: var(--castagno);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    overflow-x: clip;
+  }
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-serif);
+    font-variation-settings: "SOFT" 50, "WONK" 0;
+    font-weight: 340;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--castagno);
+    color: var(--primary-foreground);
+  }
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .kicker {
+    @apply text-[0.75rem] font-medium uppercase tracking-[0.14em] text-muschio-scuro;
+  }
+  .link-underline {
+    @apply underline decoration-castagno/40 underline-offset-4 transition-colors duration-150 hover:decoration-castagno;
+  }
+}
+
+/*
+  Segnaposto: ogni testo scritto da Altalogik e non ancora confermato dalla cliente
+  porta data-placeholder. Con ?segnaposto=1 nell'indirizzo vengono evidenziati.
+*/
+html.show-placeholders [data-placeholder] {
+  outline: 2px dashed #c2410c;
+  outline-offset: 3px;
+  background: rgb(253 230 138 / 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
