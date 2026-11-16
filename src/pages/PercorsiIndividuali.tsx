@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { CtaBand, Section } from '@/components/site/blocks'
 import { Photo } from '@/components/site/Photo'
 import { Ph } from '@/components/site/Ph'
+import { PercorsoGallery } from '@/components/site/PercorsoGallery'
 import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
 import { photos } from '@/lib/photos'
 import { SITE_URL } from '@/lib/site'
@@ -127,6 +128,10 @@ export default function PercorsiIndividuali() {
             Scrivimi in modo riservato <ArrowRight />
           </Link>
         </Button>
+      </Section>
+
+      <Section className="pt-0 md:pt-0">
+        <PercorsoGallery id="individuali" title="Sentieri per due" photos={[photos.bivio, photos.luceBosco, photos.castagne]} />
       </Section>
 
       <CtaBand title="Preferisci iniziare in gruppo?" text="Le camminate di ascolto sono un buon primo passo." />

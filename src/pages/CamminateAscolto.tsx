@@ -5,6 +5,7 @@ import { Timeline } from '@/components/ui/timeline'
 import { CtaBand, FactList, PageHeader, Section } from '@/components/site/blocks'
 import { Photo } from '@/components/site/Photo'
 import { Ph } from '@/components/site/Ph'
+import { PercorsoGallery } from '@/components/site/PercorsoGallery'
 import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
 import { photos } from '@/lib/photos'
 import { SITE_URL } from '@/lib/site'
@@ -154,6 +155,10 @@ export default function CamminateAscolto() {
             </Link>
           </Button>
         </Reveal>
+      </Section>
+
+      <Section className="pt-0 md:pt-0">
+        <PercorsoGallery id="camminate" title="Il bosco, da vicino" photos={[photos.gruppo, photos.muschio, photos.sentieroVerde]} />
       </Section>
 
       <CtaBand />

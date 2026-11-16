@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { CtaBand, PageHeader, Section } from '@/components/site/blocks'
 import { Photo } from '@/components/site/Photo'
 import { Ph } from '@/components/site/Ph'
+import { PercorsoGallery } from '@/components/site/PercorsoGallery'
 import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
 import { photos } from '@/lib/photos'
 import { SITE_URL } from '@/lib/site'
@@ -118,6 +119,10 @@ export default function GiornateRitiri() {
             Chiedi il programma <ArrowRight />
           </Link>
         </Button>
+      </Section>
+
+      <Section className="pt-0 md:pt-0">
+        <PercorsoGallery id="giornate" title="Dal bosco al lago" photos={[photos.albaLago, photos.lagoColline, photos.nebbiaAbeti]} />
       </Section>
 
       <CtaBand />
