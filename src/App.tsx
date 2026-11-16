@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Header } from '@/components/ui/header-2'
 import { Footer2 } from '@/components/ui/footer-2'
+import { Apertura } from '@/components/site/Apertura'
 import Home from '@/pages/Home'
 const Percorsi = lazy(() => import('@/pages/Percorsi'))
 const CamminateAscolto = lazy(() => import('@/pages/CamminateAscolto'))
@@ -51,6 +52,7 @@ export default function App() {
       >
         Vai al contenuto
       </a>
+      <Apertura />
       <ScrollToTop />
       <PlaceholderToggle />
       <Header />

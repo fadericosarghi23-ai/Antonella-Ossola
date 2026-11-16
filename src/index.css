@@ -215,6 +215,37 @@ html.show-placeholders [data-placeholder] {
   animation: mosaico-in 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: var(--d, 0s);
 }
+/* Apertura (Apertura.tsx): il crinale si traccia in 450ms, poi il sipario si alza in 350ms. Totale 800ms. */
+@keyframes apertura-sipario {
+  0%,
+  56% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+.apertura {
+  animation: apertura-sipario 800ms cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+.apertura-segno path {
+  stroke-dasharray: 1;
+  animation: traccia 450ms cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+@keyframes apertura-sole {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.apertura-segno circle {
+  animation: apertura-sole 300ms ease-out 200ms both;
+}
+
 /* Hero "sotto le chiome": la foto entra al caricamento (800ms, solo immagine) */
 @keyframes chiome-in {
   from {
