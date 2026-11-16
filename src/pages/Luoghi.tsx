@@ -1,5 +1,6 @@
 import { Gallery, GalleryGrid, GalleryImage } from '@/components/ui/shared-element-gallery'
 import { LuoghiMap, type Luogo } from '@/components/site/LuoghiMap'
+import { Rilievo3D } from '@/components/site/Rilievo3D'
 import { CtaBand, PageHeader, Section } from '@/components/site/blocks'
 import { Ph } from '@/components/site/Ph'
 import { Reveal, stagger } from '@/components/site/Reveal'
@@ -60,6 +61,9 @@ const luoghi: Luogo[] = [
   },
 ]
 
+// Punti per il rilievo 3D (costante di modulo: non cambia a ogni render)
+const marcatori = luoghi.map((l) => ({ id: l.id, nome: l.nome, lon: l.lon, lat: l.lat }))
+
 const galleria = [
   photos.nebbiaAbeti,
   photos.lagoColline,
@@ -87,7 +91,17 @@ export default function Luoghi() {
         }
       />
 
+      {/* Momento d'autore: il rilievo reale del territorio, in 3D */}
       <Section className="pt-8 md:pt-10">
+        <Reveal>
+          <Rilievo3D markers={marcatori} />
+        </Reveal>
+      </Section>
+
+      <Section className="pt-0 md:pt-0">
+        <Reveal className="mb-8">
+          <h2 className="text-3xl md:text-4xl">Quattro luoghi, da vicino</h2>
+        </Reveal>
         <Reveal>
           <LuoghiMap luoghi={luoghi} />
         </Reveal>

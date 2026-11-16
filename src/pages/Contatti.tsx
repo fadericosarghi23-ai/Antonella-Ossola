@@ -4,6 +4,7 @@ import { PageHeader, Section } from '@/components/site/blocks'
 import { RequestForm } from '@/components/site/RequestForm'
 import { Ph } from '@/components/site/Ph'
 import { Reveal } from '@/components/site/Reveal'
+import { DriftRings } from '@/components/site/Parallax'
 import { contatti } from '@/lib/site'
 import { useSeo } from '@/hooks/use-seo'
 import meta from '@/lib/routes-meta.json'
@@ -12,6 +13,9 @@ export default function Contatti() {
   useSeo({ ...meta['/contatti'], path: '/contatti' })
   return (
     <>
+      <div className="relative">
+        <DriftRings className="absolute -top-10 right-0 hidden w-[28rem] md:block" />
+      </div>
       <PageHeader
         kicker="Contatti"
         title="Raccontami cosa cerchi."

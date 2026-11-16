@@ -3,6 +3,7 @@ import { ArrowRight, Lock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { CtaBand, Section } from '@/components/site/blocks'
 import { Photo } from '@/components/site/Photo'
+import { ParallaxImage } from '@/components/site/Parallax'
 import { Ph } from '@/components/site/Ph'
 import { PercorsoGallery } from '@/components/site/PercorsoGallery'
 import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
@@ -52,13 +53,15 @@ export default function PercorsiIndividuali() {
         </div>
         <div className="md:col-span-5 md:pt-16">
           <RevealImage className="aspect-[4/5] rounded-2xl">
-            <Photo
-              photo={photos.bivio}
-              priority
-              sizes="(min-width: 768px) 40vw, 100vw"
-              className="h-full w-full"
-              imgClassName="object-[40%_50%]"
-            />
+            <ParallaxImage className="h-full w-full" amount={10}>
+              <Photo
+                photo={photos.bivio}
+                priority
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="h-full w-full"
+                imgClassName="object-[40%_50%]"
+              />
+            </ParallaxImage>
           </RevealImage>
         </div>
       </section>

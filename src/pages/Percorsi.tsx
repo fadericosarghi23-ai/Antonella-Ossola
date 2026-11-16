@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { CtaBand, PageHeader, Section } from '@/components/site/blocks'
 import { Photo } from '@/components/site/Photo'
+import { ParallaxImage } from '@/components/site/Parallax'
 import { Ph } from '@/components/site/Ph'
 import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
 import { photos } from '@/lib/photos'
@@ -63,12 +64,14 @@ export default function Percorsi() {
             <Reveal key={p.slug} delay={stagger(i)}>
             <Link to={p.href} className="group flex flex-col">
               <RevealImage delay={stagger(i)} className="aspect-[3/2] rounded-2xl sm:aspect-[4/5]">
+                <ParallaxImage className="h-full w-full">
                 <Photo
                   photo={foto[p.slug as keyof typeof foto]}
                   sizes="(min-width: 768px) 33vw, 100vw"
                   className="h-full w-full"
                   imgClassName="transition-transform duration-200 ease-out group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
                 />
+                </ParallaxImage>
               </RevealImage>
               <p className="kicker mt-5">{p.sottotitolo}</p>
               <h2 className="mt-2 text-3xl transition-colors duration-150 group-hover:text-castagno group-focus-visible:text-castagno">{p.nome}</h2>

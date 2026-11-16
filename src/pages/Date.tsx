@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { PageHeader, Section } from '@/components/site/blocks'
 import { Photo } from '@/components/site/Photo'
+import { ParallaxImage } from '@/components/site/Parallax'
 import { Ph } from '@/components/site/Ph'
 import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
 import { photos } from '@/lib/photos'
@@ -150,7 +151,9 @@ export default function DatePage() {
           )}
         </Reveal>
         <RevealImage delay={stagger(1)} className="relative hidden rounded-3xl md:col-span-5 md:block">
-          <Photo photo={photos.nebbiaAbeti} sizes="(min-width: 768px) 40vw, 100vw" className="absolute inset-0 h-full w-full" />
+          <ParallaxImage className="absolute inset-0 h-full w-full" amount={10}>
+            <Photo photo={photos.nebbiaAbeti} sizes="(min-width: 768px) 40vw, 100vw" className="h-full w-full" />
+          </ParallaxImage>
         </RevealImage>
       </Section>
     </>

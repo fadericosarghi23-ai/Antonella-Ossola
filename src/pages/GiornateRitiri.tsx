@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -5,6 +6,7 @@ import { CtaBand, PageHeader, Section } from '@/components/site/blocks'
 import { Photo } from '@/components/site/Photo'
 import { Ph } from '@/components/site/Ph'
 import { PercorsoGallery } from '@/components/site/PercorsoGallery'
+import { ArcoDelSole } from '@/components/site/ArcoDelSole'
 import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
 import { photos } from '@/lib/photos'
 import { SITE_URL } from '@/lib/site'
@@ -44,6 +46,7 @@ const zaino = [
 
 export default function GiornateRitiri() {
   useSeo({ ...meta[path], path, jsonLd })
+  const programmaRef = useRef<HTMLOListElement>(null)
   return (
     <>
       <PageHeader
@@ -61,13 +64,18 @@ export default function GiornateRitiri() {
 
       <Section className="grid gap-12 md:grid-cols-12">
         <Reveal className="md:col-span-4">
-          <p className="kicker">Programma tipo</p>
-          <h2 className="mt-4 text-4xl leading-[1.06] md:text-5xl">Una giornata, ora per ora</h2>
-          <p className="mt-4 text-muted-foreground">
-            <Ph>Indicativo: il programma reale cambia con il luogo e la stagione.</Ph>
-          </p>
+          <div className="md:sticky md:top-28">
+            <p className="kicker">Programma tipo</p>
+            <h2 className="mt-4 text-4xl leading-[1.06] md:text-5xl">Una giornata, ora per ora</h2>
+            <p className="mt-4 text-muted-foreground">
+              <Ph>Indicativo: il programma reale cambia con il luogo e la stagione.</Ph>
+            </p>
+            <div className="mt-8">
+              <ArcoDelSole target={programmaRef} />
+            </div>
+          </div>
         </Reveal>
-        <ol className="md:col-span-8">
+        <ol ref={programmaRef} className="md:col-span-8">
           {programma.map((p, i) => (
             <li key={p.ora}>
               <Reveal delay={stagger(i)} className="grid grid-cols-[4.5rem_1fr] gap-4 border-t py-4 sm:grid-cols-[6rem_1fr]">

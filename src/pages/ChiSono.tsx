@@ -3,6 +3,7 @@ import { CtaBand, PageHeader, Section } from '@/components/site/blocks'
 import { Ph } from '@/components/site/Ph'
 import { Reveal, stagger } from '@/components/site/Reveal'
 import { PhotoPlaceholder } from '@/components/site/PhotoPlaceholder'
+import { ProfiloSentiero } from '@/components/site/ProfiloSentiero'
 import { SITE_URL } from '@/lib/site'
 import { useSeo } from '@/hooks/use-seo'
 import meta from '@/lib/routes-meta.json'
@@ -56,6 +57,13 @@ export default function ChiSono() {
             </Ph>
           </Reveal>
         </div>
+      </Section>
+
+      {/* Momento d'autore: il profilo del Sentiero Italia che cita, disegnato con lo scroll */}
+      <Section className="pt-0 md:pt-0">
+        <Reveal>
+          <ProfiloSentiero />
+        </Reveal>
       </Section>
 
       {/* Citazione e "Perché camminare" in una sola sezione */}
