@@ -8,6 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { PageHeader, Section } from '@/components/site/blocks'
 import { Photo } from '@/components/site/Photo'
 import { Ph } from '@/components/site/Ph'
+import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
 import { photos } from '@/lib/photos'
 import { percorsi } from '@/lib/site'
 import { sendForm } from '@/lib/forms'
@@ -55,8 +56,8 @@ export default function DatePage() {
           </Ph>
         }
       />
-      <Section className="grid gap-10 pt-12 md:grid-cols-12 md:pt-16">
-        <div className="md:col-span-7">
+      <Section className="grid gap-8 pt-8 md:grid-cols-12 md:pt-10">
+        <Reveal className="md:col-span-7">
           {stato === 'ok' ? (
             <div className="rounded-3xl border bg-card p-8 md:p-10" role="status">
               <CheckCircle2 className="size-10 text-muschio" aria-hidden="true" />
@@ -147,10 +148,10 @@ export default function DatePage() {
               </Button>
             </form>
           )}
-        </div>
-        <div className="md:col-span-5">
-          <Photo photo={photos.nebbiaAbeti} sizes="(min-width: 768px) 40vw, 100vw" className="aspect-[4/5] rounded-3xl" />
-        </div>
+        </Reveal>
+        <RevealImage delay={stagger(1)} className="aspect-[4/5] rounded-3xl md:col-span-5">
+          <Photo photo={photos.nebbiaAbeti} sizes="(min-width: 768px) 40vw, 100vw" className="h-full w-full" />
+        </RevealImage>
       </Section>
     </>
   )

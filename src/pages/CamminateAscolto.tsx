@@ -5,6 +5,7 @@ import { Timeline } from '@/components/ui/timeline'
 import { CtaBand, FactList, PageHeader, Section } from '@/components/site/blocks'
 import { Photo } from '@/components/site/Photo'
 import { Ph } from '@/components/site/Ph'
+import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
 import { photos } from '@/lib/photos'
 import { SITE_URL } from '@/lib/site'
 import { useSeo } from '@/hooks/use-seo'
@@ -54,7 +55,9 @@ const tappe = [
           Si cammina a passo lento, alternando tratti in silenzio e brevi soste. Ad ogni sosta una domanda semplice,
           da tenere con sé per il tratto successivo.
         </Ph>
-        <Photo photo={photos.sentieroAutunno} sizes="(min-width: 768px) 640px, 100vw" className="aspect-[3/2] rounded-2xl" />
+        <RevealImage className="aspect-[3/2] rounded-2xl">
+          <Photo photo={photos.sentieroAutunno} sizes="(min-width: 768px) 640px, 100vw" className="h-full w-full" />
+        </RevealImage>
       </div>
     ),
   },
@@ -99,25 +102,27 @@ export default function CamminateAscolto() {
       />
 
       <Section className="grid gap-12 md:grid-cols-12">
-        <div className="md:col-span-5">
+        <Reveal className="md:col-span-5">
           <h2 className="text-4xl leading-[1.06] md:text-5xl">A chi si rivolge</h2>
-        </div>
+        </Reveal>
         <ul className="space-y-4 text-lg md:col-span-7">
           {[
             'A chi sente il bisogno di rallentare, anche solo per qualche ora.',
             'A chi cammina poco e vuole cominciare senza fretta.',
             'A chi preferisce un gruppo piccolo a un’escursione affollata.',
             'A chi vuole conoscere sentieri della provincia meno frequentati.',
-          ].map((t) => (
-            <li key={t} className="flex gap-4 border-b pb-4">
-              <span aria-hidden="true" className="mt-3 size-1.5 shrink-0 rounded-full bg-castagno" />
-              <Ph>{t}</Ph>
+          ].map((t, i) => (
+            <li key={t}>
+              <Reveal delay={stagger(i)} className="flex gap-4 border-b pb-4">
+                <span aria-hidden="true" className="mt-3 size-1.5 shrink-0 rounded-full bg-castagno" />
+                <Ph>{t}</Ph>
+              </Reveal>
             </li>
           ))}
         </ul>
       </Section>
 
-      <section className="py-8 md:py-12">
+      <section className="py-4 md:py-6">
         <Timeline
           heading="Com’è fatta una mattina"
           intro={<Ph as="p">Ogni camminata ha lo stesso ritmo in cinque tempi. Cambiano il sentiero e la stagione.</Ph>}
@@ -126,13 +131,13 @@ export default function CamminateAscolto() {
       </section>
 
       <Section className="grid gap-12 md:grid-cols-12">
-        <div className="md:col-span-5">
+        <Reveal className="md:col-span-5">
           <h2 className="text-4xl leading-[1.06] md:text-5xl">In pratica</h2>
           <p className="mt-4 text-muted-foreground">
             I dettagli definitivi arriveranno con il calendario delle prime uscite.
           </p>
-        </div>
-        <div className="md:col-span-7">
+        </Reveal>
+        <Reveal delay={stagger(1)} className="md:col-span-7">
           <FactList
             items={[
               { k: 'Durata', v: <Ph>Circa 3 ore e mezza</Ph> },
@@ -148,7 +153,7 @@ export default function CamminateAscolto() {
               Chiedi informazioni <ArrowRight />
             </Link>
           </Button>
-        </div>
+        </Reveal>
       </Section>
 
       <CtaBand />

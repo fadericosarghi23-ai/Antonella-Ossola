@@ -74,7 +74,7 @@ export default function EditorialServiceList({
     >
       {/* Header */}
       {(title || subtitle) && (
-        <header className="mb-10 flex flex-col justify-between gap-6 pb-2 sm:flex-row sm:items-end">
+        <header className="mb-8 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             {kicker && <span className="kicker mb-3 block">{kicker}</span>}
             <h2 className="text-4xl leading-[1.06] whitespace-pre-line text-foreground md:text-5xl">
@@ -104,7 +104,7 @@ export default function EditorialServiceList({
                   set({ expanded: open ? -1 : i });
                   onAction?.(service.name);
                 }}
-                className="group flex w-full cursor-pointer items-center rounded-sm py-6 text-left transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:py-8"
+                className="group flex w-full cursor-pointer items-center rounded-sm py-5 text-left transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:py-6"
               >
                 {/* Step Number */}
                 <span className="w-10 shrink-0 font-sans text-xs text-muted-foreground tabular-nums md:w-14">

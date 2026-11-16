@@ -2,6 +2,7 @@ import { Gallery, GalleryGrid, GalleryImage } from '@/components/ui/shared-eleme
 import { LuoghiMap, type Luogo } from '@/components/site/LuoghiMap'
 import { CtaBand, PageHeader, Section } from '@/components/site/blocks'
 import { Ph } from '@/components/site/Ph'
+import { Reveal, stagger } from '@/components/site/Reveal'
 import { photos } from '@/lib/photos'
 import { useSeo } from '@/hooks/use-seo'
 import meta from '@/lib/routes-meta.json'
@@ -86,29 +87,32 @@ export default function Luoghi() {
         }
       />
 
-      <Section className="pt-12 md:pt-16">
-        <LuoghiMap luoghi={luoghi} />
+      <Section className="pt-8 md:pt-10">
+        <Reveal>
+          <LuoghiMap luoghi={luoghi} />
+        </Reveal>
       </Section>
 
       <Section className="pt-0 md:pt-0">
-        <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <Reveal className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <h2 className="text-4xl leading-[1.06] md:text-5xl">Stagioni e dettagli</h2>
           <Ph as="p" className="max-w-sm text-muted-foreground">
             Foto provvisorie: saranno sostituite con immagini scattate sui percorsi.
           </Ph>
-        </div>
+        </Reveal>
         <Gallery>
           <GalleryGrid>
             {galleria.map((p, i) => (
-              <GalleryImage
-                key={i}
-                id={`g${i}`}
-                src={p.sm}
-                full={p.src}
-                width={800}
-                height={Math.round((800 * p.h) / p.w)}
-                alt={p.alt}
-              />
+              <Reveal key={i} delay={stagger(i % 3)} className="break-inside-avoid">
+                <GalleryImage
+                  id={`g${i}`}
+                  src={p.sm}
+                  full={p.src}
+                  width={800}
+                  height={Math.round((800 * p.h) / p.w)}
+                  alt={p.alt}
+                />
+              </Reveal>
             ))}
           </GalleryGrid>
         </Gallery>

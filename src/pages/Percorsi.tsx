@@ -3,6 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { CtaBand, PageHeader, Section } from '@/components/site/blocks'
 import { Photo } from '@/components/site/Photo'
 import { Ph } from '@/components/site/Ph'
+import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
 import { photos } from '@/lib/photos'
 import { percorsi } from '@/lib/site'
 import { useSeo } from '@/hooks/use-seo'
@@ -56,27 +57,32 @@ export default function Percorsi() {
         lead={<Ph as="p">Scegli in base a quanto tempo hai, a chi vuoi accanto e a cosa cerchi.</Ph>}
       />
 
-      <Section className="pt-12 md:pt-16">
+      <Section className="pt-8 md:pt-10">
         <div className="grid gap-6 md:grid-cols-3">
-          {percorsi.map((p) => (
-            <Link key={p.slug} to={p.href} className="group flex flex-col">
-              <Photo
-                photo={foto[p.slug as keyof typeof foto]}
-                sizes="(min-width: 768px) 33vw, 100vw"
-                className="aspect-[4/5] rounded-2xl"
-                imgClassName="transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-              />
+          {percorsi.map((p, i) => (
+            <Reveal key={p.slug} delay={stagger(i)}>
+            <Link to={p.href} className="group flex flex-col">
+              <RevealImage delay={stagger(i)} className="aspect-[4/5] rounded-2xl">
+                <Photo
+                  photo={foto[p.slug as keyof typeof foto]}
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="h-full w-full"
+                  imgClassName="transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                />
+              </RevealImage>
               <p className="kicker mt-5">{p.sottotitolo}</p>
               <h2 className="mt-2 text-3xl transition-colors duration-150 group-hover:text-castagno">{p.nome}</h2>
               <Ph as="p" className="mt-2 text-muted-foreground">
                 {p.breve}
               </Ph>
             </Link>
+            </Reveal>
           ))}
         </div>
       </Section>
 
       <Section className="pt-0 md:pt-0">
+        <Reveal>
         <h2 className="text-4xl leading-[1.06] md:text-5xl">A confronto</h2>
         <div className="mt-8 -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
           <table className="w-full min-w-[640px] border-collapse text-left">
@@ -109,13 +115,15 @@ export default function Percorsi() {
             </tbody>
           </table>
         </div>
+        </Reveal>
       </Section>
 
       <Section className="grid gap-10 pt-0 md:grid-cols-12 md:pt-0">
-        <div className="md:col-span-4">
+        <Reveal className="md:col-span-4">
           <h2 className="text-4xl leading-[1.06] md:text-5xl">Domande frequenti</h2>
-        </div>
-        <Accordion type="single" collapsible className="md:col-span-8">
+        </Reveal>
+        <Reveal delay={stagger(1)} className="md:col-span-8">
+        <Accordion type="single" collapsible>
           {faq.map((f, i) => (
             <AccordionItem key={f.q} value={`q${i}`}>
               <AccordionTrigger className="font-display text-xl font-normal hover:no-underline md:text-2xl">
@@ -127,6 +135,7 @@ export default function Percorsi() {
             </AccordionItem>
           ))}
         </Accordion>
+        </Reveal>
       </Section>
 
       <CtaBand />

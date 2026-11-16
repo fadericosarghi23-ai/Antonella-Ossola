@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { CtaBand, Section } from '@/components/site/blocks'
 import { Photo } from '@/components/site/Photo'
 import { Ph } from '@/components/site/Ph'
+import { Reveal, RevealImage, stagger } from '@/components/site/Reveal'
 import { photos } from '@/lib/photos'
 import { SITE_URL } from '@/lib/site'
 import { useSeo } from '@/hooks/use-seo'
@@ -29,7 +30,7 @@ export default function PercorsiIndividuali() {
   useSeo({ ...meta[path], path, jsonLd })
   return (
     <>
-      <section className="container-site grid gap-10 pt-10 md:grid-cols-12 md:gap-8 md:pt-16">
+      <section className="container-site grid gap-8 pt-8 md:grid-cols-12 md:gap-8 md:pt-12">
         <div className="md:col-span-7">
           <nav aria-label="Percorso di navigazione" className="mb-6 text-sm text-muted-foreground">
             <Link to="/percorsi" className="link-underline">
@@ -48,38 +49,42 @@ export default function PercorsiIndividuali() {
             arrivano da sole. È uno spazio riservato, con le stesse attenzioni di uno studio.
           </Ph>
         </div>
-        <div className="md:col-span-5 md:pt-24">
-          <Photo
-            photo={photos.bivio}
-            priority
-            sizes="(min-width: 768px) 40vw, 100vw"
-            className="aspect-[4/5] rounded-2xl"
-            imgClassName="object-[40%_50%]"
-          />
+        <div className="md:col-span-5 md:pt-16">
+          <RevealImage className="aspect-[4/5] rounded-2xl">
+            <Photo
+              photo={photos.bivio}
+              priority
+              sizes="(min-width: 768px) 40vw, 100vw"
+              className="h-full w-full"
+              imgClassName="object-[40%_50%]"
+            />
+          </RevealImage>
         </div>
       </section>
 
       <Section>
-        <h2 className="max-w-2xl text-4xl leading-[1.06] md:text-5xl">Quando può essere utile</h2>
-        <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+        <Reveal>
+          <h2 className="max-w-2xl text-4xl leading-[1.06] md:text-5xl">Quando può essere utile</h2>
+        </Reveal>
+        <div className="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { t: 'Un passaggio', d: 'Un cambio di lavoro, di casa, di fase della vita che chiede di essere pensato.' },
             { t: 'Un periodo pieno', d: 'Quando la testa non si ferma e serve uno spazio fuori dalla routine.' },
             { t: 'Una decisione', d: 'Per guardare una scelta da più lati, con il tempo che il cammino concede.' },
             { t: 'Ripartire', d: 'Per ritrovare il gusto di muoversi all’aperto, con qualcuno accanto.' },
-          ].map((x) => (
-            <div key={x.t} className="border-t pt-5">
+          ].map((x, i) => (
+            <Reveal key={x.t} delay={stagger(i)} className="border-t pt-5">
               <h3 className="text-2xl">{x.t}</h3>
               <Ph as="p" className="mt-2 text-muted-foreground">
                 {x.d}
               </Ph>
-            </div>
+            </Reveal>
           ))}
         </div>
       </Section>
 
       <Section className="pt-0 md:pt-0">
-        <div className="grid gap-8 rounded-3xl border bg-card p-6 sm:p-10 md:grid-cols-12">
+        <Reveal className="grid gap-8 rounded-3xl border bg-card p-6 sm:p-10 md:grid-cols-12">
           <div className="md:col-span-1">
             <Lock className="size-7 text-castagno" aria-hidden="true" />
           </div>
@@ -94,26 +99,30 @@ export default function PercorsiIndividuali() {
             <p className="kicker mb-2">In pratica</p>
             <Ph as="p">Incontri di circa un’ora e mezza. Numero di incontri e quota da concordare.</Ph>
           </div>
-        </div>
+        </Reveal>
       </Section>
 
       <Section className="pt-0 md:pt-0">
-        <h2 className="text-4xl leading-[1.06] md:text-5xl">Come si inizia</h2>
-        <ol className="mt-10 grid gap-8 md:grid-cols-3">
+        <Reveal>
+          <h2 className="text-4xl leading-[1.06] md:text-5xl">Come si inizia</h2>
+        </Reveal>
+        <ol className="mt-8 grid gap-8 md:grid-cols-3">
           {[
             'Mi scrivi due righe su cosa cerchi, senza bisogno di spiegare tutto.',
             'Una telefonata di un quarto d’ora per capire se il cammino è la forma giusta.',
             'Fissiamo il primo incontro su un sentiero vicino a te.',
           ].map((t, i) => (
-            <li key={t} className="flex gap-4">
-              <span className="font-display text-4xl text-castagno">{i + 1}</span>
-              <Ph as="p" className="pt-2 text-lg text-muted-foreground">
-                {t}
-              </Ph>
+            <li key={t}>
+              <Reveal delay={stagger(i)} className="flex gap-4">
+                <span className="font-display text-4xl text-castagno">{i + 1}</span>
+                <Ph as="p" className="pt-2 text-lg text-muted-foreground">
+                  {t}
+                </Ph>
+              </Reveal>
             </li>
           ))}
         </ol>
-        <Button asChild size="lg" className="mt-10">
+        <Button asChild size="lg" className="mt-8">
           <Link to="/contatti?percorso=percorsi-individuali">
             Scrivimi in modo riservato <ArrowRight />
           </Link>

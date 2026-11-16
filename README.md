@@ -52,7 +52,9 @@ Costruiti a mano perché nel catalogo non c'era niente di adatto: hero con curve
 
 ## Movimento
 
-- Hero: sei curve di livello si tracciano una volta (800ms, 80ms tra una e l'altra). Unico effetto attivo anche su mobile.
+- Hero: sei curve di livello si tracciano una volta (800ms, 80ms tra una e l'altra); la foto scende più lenta della pagina (unico effetto di scroll della Home). Le curve sono l'unico effetto attivo anche su mobile.
+- Entrate allo scroll su tutte le pagine (`src/components/site/Reveal.tsx`): opacità e 16px di spostamento, 600ms, una sola volta, cascata di 80ms su massimo sei elementi. Le foto rientrano anche di scala dentro la cornice. I titoli entrano come blocco col loro testo; il testo sopra la piega è fermo e leggibile al primo frame.
+- Fascia finale: le curve decorative si tracciano all'ingresso.
 - Camminate di ascolto: la linea della timeline segue lo scroll (unico effetto di scroll della pagina).
 - Chi sono: la foto si apre con una maschera legata allo scroll (solo l'immagine).
 - Luoghi: al clic su un luogo la foto si apre con una maschera (600ms); galleria con ingrandimento condiviso al clic.

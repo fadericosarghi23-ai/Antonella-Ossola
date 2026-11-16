@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Photo } from '@/components/site/Photo'
+import { DrawRings, Reveal, RevealImage } from '@/components/site/Reveal'
 import type { PhotoSrc } from '@/lib/photos'
 import { cn } from '@/lib/utils'
 
@@ -21,7 +22,7 @@ export function PageHeader({
   breadcrumb?: { label: string; href: string }
 }) {
   return (
-    <section className="container-site pt-10 md:pt-16">
+    <section className="container-site pt-8 md:pt-12">
       {breadcrumb && (
         <nav aria-label="Percorso di navigazione" className="mb-6 text-sm text-muted-foreground">
           <Link to={breadcrumb.href} className="link-underline">
@@ -33,12 +34,9 @@ export function PageHeader({
       <h1 className="mt-4 max-w-4xl text-[2.6rem] leading-[1.04] sm:text-6xl md:text-7xl">{title}</h1>
       {lead && <div className="mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">{lead}</div>}
       {photo && (
-        <Photo
-          photo={photo}
-          priority
-          sizes="(min-width: 1152px) 1152px, 100vw"
-          className="mt-10 aspect-[4/3] rounded-2xl sm:aspect-[16/9] md:mt-14 md:aspect-[21/9]"
-        />
+        <RevealImage className="mt-8 aspect-[4/3] rounded-2xl sm:aspect-[16/9] md:mt-10 md:aspect-[21/9]">
+          <Photo photo={photo} priority sizes="(min-width: 1152px) 1152px, 100vw" className="h-full w-full" />
+        </RevealImage>
       )}
     </section>
   )
@@ -46,7 +44,7 @@ export function PageHeader({
 
 export function Section({ children, className, id }: { children: ReactNode; className?: string; id?: string }) {
   return (
-    <section id={id} className={cn('container-site py-16 md:py-24', className)}>
+    <section id={id} className={cn('container-site py-12 md:py-16', className)}>
       {children}
     </section>
   )
@@ -62,18 +60,8 @@ export function CtaBand({
 }) {
   return (
     <section className="container-site">
-      <div className="relative overflow-hidden rounded-3xl bg-bosco px-6 py-14 text-carta sm:px-12 md:py-20">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 400 400"
-          className="absolute -right-24 -bottom-24 size-[26rem] text-carta/15 md:-right-10"
-        >
-          <g fill="none" stroke="currentColor" strokeWidth="1.2">
-            {[0, 1, 2, 3, 4, 5].map((i) => (
-              <ellipse key={i} cx="210" cy="200" rx={190 - i * 30} ry={160 - i * 25} transform={`rotate(${-12 + i * 4} 210 200)`} />
-            ))}
-          </g>
-        </svg>
+      <Reveal className="relative overflow-hidden rounded-3xl bg-bosco px-6 py-12 text-carta sm:px-12 md:py-16">
+        <DrawRings className="absolute -right-24 -bottom-24 size-[26rem] text-carta/15 md:-right-10" />
         <div className="relative max-w-2xl">
           <h2 className="text-4xl leading-[1.08] md:text-5xl" data-placeholder="">
             {title}
@@ -97,7 +85,7 @@ export function CtaBand({
             </Button>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

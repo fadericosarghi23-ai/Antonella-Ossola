@@ -35,9 +35,9 @@ const footerLinks = [
 
 export function Footer2() {
   return (
-    <footer className="mt-24 border-t bg-pietra/60">
+    <footer className="mt-16 border-t bg-pietra/60 md:mt-20">
       <div className="container-site">
-        <div className="grid grid-cols-2 gap-8 py-12 md:grid-cols-5">
+        <div className="grid grid-cols-2 gap-8 py-10 md:grid-cols-5">
           <div className="col-span-2">
             <Logo />
             <p className="mt-4 max-w-xs text-sm text-muted-foreground" data-placeholder="">

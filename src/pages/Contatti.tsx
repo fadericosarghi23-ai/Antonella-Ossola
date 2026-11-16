@@ -3,6 +3,7 @@ import { ContactCard } from '@/components/ui/contact-card'
 import { PageHeader, Section } from '@/components/site/blocks'
 import { RequestForm } from '@/components/site/RequestForm'
 import { Ph } from '@/components/site/Ph'
+import { Reveal } from '@/components/site/Reveal'
 import { contatti } from '@/lib/site'
 import { useSeo } from '@/hooks/use-seo'
 import meta from '@/lib/routes-meta.json'
@@ -16,7 +17,8 @@ export default function Contatti() {
         title="Raccontami cosa cerchi."
         lead={<p>Bastano tre passi e due minuti. Se preferisci, scrivimi direttamente su WhatsApp o per email.</p>}
       />
-      <Section className="pt-12 md:pt-16">
+      <Section className="pt-8 md:pt-10">
+        <Reveal>
         <ContactCard
           title="Scrivimi"
           description={<Ph as="p">Rispondo di persona, di solito entro qualche giorno.</Ph>}
@@ -29,6 +31,7 @@ export default function Contatti() {
         >
           <RequestForm />
         </ContactCard>
+        </Reveal>
       </Section>
     </>
   )

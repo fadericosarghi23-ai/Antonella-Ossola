@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Header } from '@/components/ui/header-2'
@@ -38,6 +38,11 @@ function PlaceholderToggle() {
 export default function App() {
   const location = useLocation()
   const reduce = useReducedMotion()
+  // Al primo caricamento la pagina è subito visibile (nessuna dissolvenza): il testo si legge al primo frame.
+  const first = useRef(true)
+  useEffect(() => {
+    first.current = false
+  }, [])
   return (
     <>
       <a
@@ -50,11 +55,11 @@ export default function App() {
       <PlaceholderToggle />
       <Header />
       {/* Transizione tra pagine: solo dissolvenza breve (orientamento) */}
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence mode="wait">
         <motion.main
           id="contenuto"
           key={location.pathname}
-          initial={{ opacity: 0 }}
+          initial={first.current ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: reduce ? 0 : 0.2, ease: 'easeOut' }}
