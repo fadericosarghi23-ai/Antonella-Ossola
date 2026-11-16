@@ -62,7 +62,7 @@ export default function Percorsi() {
           {percorsi.map((p, i) => (
             <Reveal key={p.slug} delay={stagger(i)}>
             <Link to={p.href} className="group flex flex-col">
-              <RevealImage delay={stagger(i)} className="aspect-[4/5] rounded-2xl">
+              <RevealImage delay={stagger(i)} className="aspect-[3/2] rounded-2xl sm:aspect-[4/5]">
                 <Photo
                   photo={foto[p.slug as keyof typeof foto]}
                   sizes="(min-width: 768px) 33vw, 100vw"
@@ -84,7 +84,27 @@ export default function Percorsi() {
       <Section className="pt-0 md:pt-0">
         <Reveal>
         <h2 className="text-4xl leading-[1.06] md:text-5xl">A confronto</h2>
-        <div className="mt-8 -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+        {/* Su mobile il confronto diventa una scheda per percorso, invece di una tabella tagliata */}
+        <div className="mt-8 grid gap-4 sm:hidden">
+          {percorsi.map((p, col) => (
+            <div key={p.slug} className="rounded-2xl border bg-card p-5">
+              <Link to={p.href} className="link-underline font-display text-2xl">
+                {p.nome}
+              </Link>
+              <dl className="mt-3 divide-y">
+                {confronto.map((r) => (
+                  <div key={r.k} className="grid grid-cols-[6.5rem_1fr] gap-3 py-2.5">
+                    <dt className="kicker pt-0.5">{r.k}</dt>
+                    <dd>
+                      <Ph>{r.v[col]}</Ph>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 hidden sm:block">
           <table className="w-full min-w-[640px] border-collapse text-left">
             <caption className="sr-only">Confronto tra i tre percorsi</caption>
             <thead>

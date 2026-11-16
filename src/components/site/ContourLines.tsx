@@ -1,10 +1,10 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import type { CSSProperties } from 'react'
 import { cn } from '@/lib/utils'
 
 /*
   Momento d'autore dell'hero: sei curve di livello che si tracciano una sola volta (800ms, stagger 80ms su sei elementi).
   Le curve sono generate in modo deterministico per ricordare un versante visto in pianta.
-  Con prefers-reduced-motion le linee sono già complete al primo frame.
+  Animazione in CSS (index.css, "traccia"): non dipende da JavaScript. Con prefers-reduced-motion le linee sono già complete al primo frame.
 */
 
 const W = 1440
@@ -41,25 +41,22 @@ function line(i: number) {
 const PATHS = Array.from({ length: 6 }, (_, i) => line(i))
 
 export function ContourLines({ className }: { className?: string }) {
-  const reduce = useReducedMotion()
-
   return (
     <svg
       viewBox={`0 0 ${W} ${H}`}
       preserveAspectRatio="none"
       aria-hidden="true"
-      className={cn('pointer-events-none', className)}
+      className={cn('contour-draw pointer-events-none', className)}
     >
-      <g fill="none" stroke="currentColor" strokeWidth="1.25">
+      <g fill="none" stroke="currentColor" strokeWidth="1.5">
         {PATHS.map((d, i) => (
-          <motion.path
+          <path
             key={i}
             d={d}
+            pathLength={1}
             vectorEffect="non-scaling-stroke"
-            opacity={0.9 - i * 0.1}
-            initial={reduce ? false : { pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.15 + i * 0.08 }}
+            opacity={0.95 - i * 0.1}
+            style={{ '--draw-delay': `${0.15 + i * 0.08}s` } as CSSProperties}
           />
         ))}
       </g>

@@ -66,7 +66,7 @@ export function GalleryGrid({
   className?: string
 }) {
   return (
-    <div className={cn("columns-1 gap-4 sm:columns-2 lg:columns-3", className)}>
+    <div className={cn("columns-2 gap-3 sm:gap-4 lg:columns-3", className)}>
       {children}
     </div>
   )
@@ -99,7 +99,7 @@ export function GalleryImage({
       whileTap="tap"
       aria-label={`Ingrandisci: ${alt ?? "foto"}`}
       className={cn(
-        "relative mb-4 block w-full cursor-zoom-in break-inside-avoid overflow-hidden rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+        "relative mb-3 block w-full cursor-zoom-in sm:mb-4 break-inside-avoid overflow-hidden rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
         className
       )}
       onClick={() => context.setSelectedImage({ id, src, alt, full })}

@@ -103,7 +103,7 @@ export default function Luoghi() {
         <Gallery>
           <GalleryGrid>
             {galleria.map((p, i) => (
-              <Reveal key={i} delay={stagger(i % 3)} className="break-inside-avoid">
+              <Reveal key={i} delay={stagger(i % 3)} className={i >= 6 ? 'hidden break-inside-avoid sm:block' : 'break-inside-avoid'}>
                 <GalleryImage
                   id={`g${i}`}
                   src={p.sm}

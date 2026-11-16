@@ -56,7 +56,7 @@ export default function DatePage() {
           </Ph>
         }
       />
-      <Section className="grid gap-8 pt-8 md:grid-cols-12 md:pt-10">
+      <Section className="grid items-stretch gap-8 pt-8 md:grid-cols-12 md:pt-10">
         <Reveal className="md:col-span-7">
           {stato === 'ok' ? (
             <div className="rounded-3xl border bg-card p-8 md:p-10" role="status">
@@ -149,8 +149,8 @@ export default function DatePage() {
             </form>
           )}
         </Reveal>
-        <RevealImage delay={stagger(1)} className="aspect-[4/5] rounded-3xl md:col-span-5">
-          <Photo photo={photos.nebbiaAbeti} sizes="(min-width: 768px) 40vw, 100vw" className="h-full w-full" />
+        <RevealImage delay={stagger(1)} className="relative hidden rounded-3xl md:col-span-5 md:block">
+          <Photo photo={photos.nebbiaAbeti} sizes="(min-width: 768px) 40vw, 100vw" className="absolute inset-0 h-full w-full" />
         </RevealImage>
       </Section>
     </>

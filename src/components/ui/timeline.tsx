@@ -60,18 +60,18 @@ export const Timeline = ({
 
       <div ref={ref} className="relative mx-auto max-w-6xl pb-4">
         {data.map((item, index) => (
-          <div key={index} className="flex justify-start pt-8 md:gap-10 md:pt-16">
+          <div key={index} className="flex justify-start pt-6 md:gap-10 md:pt-10">
             <div className="sticky top-32 z-40 flex max-w-xs flex-col items-center self-start md:w-full md:flex-row lg:max-w-sm">
               <div className="absolute left-3 flex h-10 w-10 items-center justify-center rounded-full bg-background">
                 <div className="h-4 w-4 rounded-full border border-muschio/50 bg-pietra p-2" />
               </div>
-              <h3 className="hidden text-4xl text-muschio-scuro md:block md:pl-20 lg:text-5xl">
+              <h3 className="hidden text-3xl text-muschio-scuro md:block md:pl-20 lg:text-4xl">
                 {item.title}
               </h3>
             </div>
 
             <div className="relative w-full pr-4 pl-20 md:pl-4">
-              <h3 className="mb-4 block text-left text-3xl text-muschio-scuro md:hidden">{item.title}</h3>
+              <h3 className="mb-3 block text-left text-2xl text-muschio-scuro md:hidden">{item.title}</h3>
               {item.content}
             </div>
           </div>

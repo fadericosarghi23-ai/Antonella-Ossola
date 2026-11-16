@@ -6,7 +6,7 @@ import { useSeo } from '@/hooks/use-seo'
 export default function NotFound() {
   useSeo({ title: 'Pagina non trovata · Antonella Ossola', description: 'La pagina cercata non esiste.', path: '/404' })
   return (
-    <section className="container-site flex min-h-[70svh] flex-col items-start justify-center py-24">
+    <section className="container-site flex flex-col items-start justify-center py-16 md:py-24">
       <LogoMark className="size-16 text-muschio" />
       <p className="kicker mt-8">Errore 404</p>
       <h1 className="mt-4 max-w-2xl text-5xl leading-[1.04] md:text-7xl">Questo sentiero non porta da nessuna parte.</h1>

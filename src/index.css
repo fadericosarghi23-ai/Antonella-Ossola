@@ -131,7 +131,55 @@ html.show-placeholders [data-placeholder] {
   background: rgb(253 230 138 / 0.35);
 }
 
+/*
+  Entrate (Reveal.tsx). Il contenuto si nasconde solo con html.reveal-ready, da 768px in su
+  e senza preferenza di movimento ridotto: su mobile, senza JS o con reduced motion è sempre visibile.
+*/
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  html.reveal-ready [data-reveal] {
+    transition:
+      opacity 600ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+      transform 600ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+  }
+  html.reveal-ready [data-reveal]:not(.is-in) {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  html.reveal-ready [data-reveal-img] > * {
+    transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+  }
+  html.reveal-ready [data-reveal-img]:not(.is-in) > * {
+    transform: scale(1.06);
+  }
+  html.reveal-ready [data-reveal-draw] ellipse {
+    stroke-dasharray: 1;
+    transition: stroke-dashoffset 600ms cubic-bezier(0.22, 1, 0.36, 1) var(--draw-delay, 0s);
+  }
+  html.reveal-ready [data-reveal-draw]:not(.is-in) ellipse {
+    stroke-dashoffset: 1;
+  }
+}
+
+/* Momento dell'hero: le curve di livello si tracciano al caricamento, in CSS (800ms, 80ms tra una e l'altra). */
+@keyframes traccia {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.contour-draw path {
+  stroke-dasharray: 1;
+  animation: traccia 800ms cubic-bezier(0.33, 1, 0.68, 1) both;
+  animation-delay: var(--draw-delay, 0s);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .contour-draw path {
+    animation: none;
+    stroke-dasharray: none;
+  }
   *,
   *::before,
   *::after {

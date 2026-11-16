@@ -174,7 +174,7 @@ export default function Home() {
           {luoghiTeaser.map((l, i) => (
             <Reveal key={l.nome} delay={stagger(i)}>
               <Link to="/luoghi" className="group block">
-                <RevealImage delay={stagger(i)} className="aspect-[4/5] rounded-2xl">
+                <RevealImage delay={stagger(i)} className="aspect-[3/2] rounded-2xl sm:aspect-[4/5]">
                   <Photo
                     photo={l.photo}
                     sizes="(min-width: 640px) 33vw, 100vw"

@@ -84,18 +84,18 @@ export default function PercorsiIndividuali() {
       </Section>
 
       <Section className="pt-0 md:pt-0">
-        <Reveal className="grid gap-8 rounded-3xl border bg-card p-6 sm:p-10 md:grid-cols-12">
-          <div className="md:col-span-1">
-            <Lock className="size-7 text-castagno" aria-hidden="true" />
-          </div>
-          <div className="md:col-span-7">
-            <h2 className="text-3xl md:text-4xl">Riservatezza</h2>
+        <Reveal className="grid gap-6 rounded-3xl border bg-card p-6 sm:p-8 md:grid-cols-12 md:gap-10">
+          <div className="md:col-span-8">
+            <h2 className="flex items-center gap-3 text-3xl md:text-4xl">
+              <Lock className="size-6 shrink-0 text-castagno" aria-hidden="true" />
+              Riservatezza
+            </h2>
             <Ph as="p" className="mt-4 text-lg text-muted-foreground">
               Scegliamo insieme sentieri tranquilli e orari poco frequentati. Quello che ci diciamo resta tra noi, con le
               stesse regole di riservatezza di un colloquio.
             </Ph>
           </div>
-          <div className="text-sm text-muted-foreground md:col-span-4">
+          <div className="self-end border-t pt-4 text-sm text-muted-foreground md:col-span-4 md:border-t-0 md:border-l md:pt-0 md:pl-6">
             <p className="kicker mb-2">In pratica</p>
             <Ph as="p">Incontri di circa un’ora e mezza. Numero di incontri e quota da concordare.</Ph>
           </div>

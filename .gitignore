@@ -25,3 +25,6 @@ dist-ssr
 
 # Locale
 .claude/
+
+# Screenshot di audit (non fanno parte del sito)
+audit/

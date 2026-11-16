@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
-import { RevealImageMask } from '@/components/ui/reveal-image-mask'
 import { CtaBand, PageHeader, Section } from '@/components/site/blocks'
 import { Ph } from '@/components/site/Ph'
 import { Reveal, stagger } from '@/components/site/Reveal'
-import { photos } from '@/lib/photos'
+import { PhotoPlaceholder } from '@/components/site/PhotoPlaceholder'
 import { SITE_URL } from '@/lib/site'
 import { useSeo } from '@/hooks/use-seo'
 import meta from '@/lib/routes-meta.json'
@@ -29,55 +28,50 @@ export default function ChiSono() {
         }
       />
 
-      {/* Momento d'autore della pagina: la foto si apre con lo scroll (solo l'immagine si muove) */}
-      <Section className="pt-8 md:pt-10">
-        <RevealImageMask
-          src={photos.luceBosco.src}
-          srcSet={`${photos.luceBosco.sm} 800w, ${photos.luceBosco.src} 1600w`}
-          alt="[SEGNAPOSTO] Ritratto di Antonella sul sentiero, da fotografare"
-        />
-        <Ph as="p" className="mt-3 text-sm text-muted-foreground">
-          Qui andrà un ritratto di Antonella in cammino, scattato su uno dei suoi sentieri.
-        </Ph>
-      </Section>
-
-      <Section className="grid gap-10 pt-0 md:grid-cols-2 md:gap-14 md:pt-0">
-        <Reveal className="border-t pt-6">
-          <p className="kicker">Per formazione</p>
-          <h2 className="mt-3 text-3xl md:text-4xl">La psicologa</h2>
-          <Ph as="p" className="mt-4 text-lg text-muted-foreground">
-            Il mio lavoro è ascoltare e aiutare le persone a dare forma a quello che vivono. Formazione, iscrizione
-            all’Albo e ambiti di lavoro saranno indicati qui.
-          </Ph>
-        </Reveal>
-        <Reveal delay={stagger(1)} className="border-t pt-6">
-          <p className="kicker">Per passione</p>
-          <h2 className="mt-3 text-3xl md:text-4xl">La montagna di casa</h2>
-          <Ph as="p" className="mt-4 text-lg text-muted-foreground">
-            Cammino da anni sulle montagne della provincia e ho fatto parte attiva del CAI di Varese, di cui sono stata
-            presidente. Conosco i sentieri, i loro tempi e le loro attenzioni.
-          </Ph>
-        </Reveal>
-      </Section>
-
-      <Section className="pt-0 md:pt-0">
-        <Reveal>
-        <figure className="mx-auto max-w-4xl text-center">
-          <blockquote className="font-display text-3xl leading-snug text-bosco md:text-5xl">
-            “Muoviamoci con garbo, gentilezza, come quando siamo ospiti a casa di qualcuno.”
-          </blockquote>
-          <figcaption className="mt-6 text-sm text-muted-foreground">
-            Antonella Ossola, intervista a <cite>Il Giorno</cite>, 17 maggio 2020
-          </figcaption>
-        </figure>
-        </Reveal>
-      </Section>
-
-      <Section className="grid gap-10 pt-0 md:grid-cols-12 md:pt-0">
+      {/* Ritratto (da scattare) accanto alle due anime del lavoro */}
+      <Section className="grid gap-8 pt-8 md:grid-cols-12 md:gap-12 md:pt-10">
         <Reveal className="md:col-span-5">
-          <h2 className="text-4xl leading-[1.06] md:text-5xl">Perché camminare</h2>
+          <PhotoPlaceholder
+            soggetto="Ritratto di Antonella in cammino su uno dei suoi sentieri"
+            formato="verticale 4:5"
+            note="Luce naturale, sguardo non in posa. Sostituisce la foto provvisoria."
+            className="aspect-[4/5]"
+          />
+        </Reveal>
+        <div className="grid content-center gap-10 md:col-span-7">
+          <Reveal delay={stagger(1)} className="border-t pt-6">
+            <p className="kicker">Per formazione</p>
+            <h2 className="mt-3 text-3xl md:text-4xl">La psicologa</h2>
+            <Ph as="p" className="mt-4 text-lg text-muted-foreground">
+              Il mio lavoro è ascoltare e aiutare le persone a dare forma a quello che vivono. Formazione, iscrizione
+              all’Albo e ambiti di lavoro saranno indicati qui.
+            </Ph>
+          </Reveal>
+          <Reveal delay={stagger(2)} className="border-t pt-6">
+            <p className="kicker">Per passione</p>
+            <h2 className="mt-3 text-3xl md:text-4xl">La montagna di casa</h2>
+            <Ph as="p" className="mt-4 text-lg text-muted-foreground">
+              Cammino da anni sulle montagne della provincia e ho fatto parte attiva del CAI di Varese, di cui sono stata
+              presidente. Conosco i sentieri, i loro tempi e le loro attenzioni.
+            </Ph>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Citazione e "Perché camminare" in una sola sezione */}
+      <Section className="grid gap-10 pt-0 md:grid-cols-12 md:gap-12 md:pt-0">
+        <Reveal className="md:col-span-5">
+          <figure className="border-l-2 border-castagno pl-6">
+            <blockquote className="font-display text-3xl leading-snug text-bosco md:text-4xl">
+              “Muoviamoci con garbo, gentilezza, come quando siamo ospiti a casa di qualcuno.”
+            </blockquote>
+            <figcaption className="mt-4 text-sm text-muted-foreground">
+              Antonella Ossola, intervista a <cite>Il Giorno</cite>, 17 maggio 2020
+            </figcaption>
+          </figure>
         </Reveal>
         <Reveal delay={stagger(1)} className="space-y-5 text-lg text-muted-foreground md:col-span-7">
+          <h2 className="text-4xl leading-[1.06] text-foreground md:text-5xl">Perché camminare</h2>
           <Ph as="p">
             Camminando lo sguardo si apre, il respiro rallenta, le parole arrivano con meno fatica. Non serve andare
             lontano: i boschi e i laghi della provincia offrono sentieri tranquilli a pochi chilometri da casa.
