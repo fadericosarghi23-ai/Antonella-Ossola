@@ -74,7 +74,7 @@ export default function EditorialServiceList({
     >
       {/* Header */}
       {(title || subtitle) && (
-        <header className="mb-8 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+        <header className="mb-8 flex flex-col gap-4">
           <div>
             {kicker && <span className="kicker mb-3 block">{kicker}</span>}
             <h2 className="text-4xl leading-[1.06] whitespace-pre-line text-foreground md:text-5xl">
@@ -113,7 +113,7 @@ export default function EditorialServiceList({
 
                 {/* Service Name */}
                 <span
-                  className={`font-display text-[1.7rem] leading-tight text-foreground transition-[transform,color] duration-200 sm:text-4xl md:text-5xl ${
+                  className={`font-display text-[1.7rem] leading-tight text-foreground transition-[transform,color] duration-200 sm:text-3xl lg:text-4xl ${
                     open ? "translate-x-2 text-castagno" : "group-hover:translate-x-2"
                   }`}
                 >

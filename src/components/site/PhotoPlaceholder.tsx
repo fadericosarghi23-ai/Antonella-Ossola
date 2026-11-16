@@ -1,5 +1,6 @@
 import { Camera } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { CRINALE } from '@/components/brand/Logo'
 
 /**
  * [SEGNAPOSTO] Riquadro dimensionato al posto di una foto che ancora non c'è.
@@ -24,12 +25,9 @@ export function PhotoPlaceholder({
         className,
       )}
     >
-      <svg aria-hidden="true" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full text-muschio/25">
-        <g fill="none" stroke="currentColor" strokeWidth="1">
-          {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-            <ellipse key={i} cx="170" cy="120" rx={150 - i * 20} ry={110 - i * 15} transform={`rotate(${-15 + i * 5} 170 120)`} />
-          ))}
-        </g>
+      <svg aria-hidden="true" viewBox="0 0 92 44" className="absolute inset-x-6 top-8 w-[calc(100%-3rem)] text-muschio/40">
+        <circle cx="70" cy="9" r="3" fill="var(--castagno)" fillOpacity="0.6" />
+        <path d={CRINALE} fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
       <figcaption className="relative">
         <Camera className="size-6 text-castagno" aria-hidden="true" />

@@ -2,6 +2,7 @@ import { useRef, type ReactNode } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useDesktop } from '@/hooks/use-desktop'
 import { cn } from '@/lib/utils'
+import { CRINALE } from '@/components/brand/Logo'
 
 /*
   Effetti legati allo scroll: al massimo uno per pagina, solo su immagini o decorazioni, mai sul testo.
@@ -29,24 +30,21 @@ export function ParallaxImage({ children, className, amount = 8 }: { children: R
   )
 }
 
-/** Curve di livello decorative che ruotano piano con lo scroll della pagina (intestazioni brevi). */
+/** Il crinale del marchio, grande e tenue, che scorre piano con lo scroll (intestazioni brevi). */
 export function DriftRings({ className }: { className?: string }) {
   const active = useActive()
   const { scrollY } = useScroll()
-  const rotate = useTransform(scrollY, [0, 900], [0, 24])
-  const y = useTransform(scrollY, [0, 900], [0, 80])
+  const x = useTransform(scrollY, [0, 900], [0, -60])
+  const y = useTransform(scrollY, [0, 900], [0, 50])
   return (
     <motion.svg
       aria-hidden="true"
-      viewBox="0 0 400 400"
-      className={cn('pointer-events-none text-muschio/20', className)}
-      style={active ? { rotate, y } : undefined}
+      viewBox="0 0 92 44"
+      className={cn('pointer-events-none text-muschio/25', className)}
+      style={active ? { x, y } : undefined}
     >
-      <g fill="none" stroke="currentColor" strokeWidth="1.1">
-        {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-          <ellipse key={i} cx="210" cy="200" rx={190 - i * 26} ry={150 - i * 20} transform={`rotate(${-12 + i * 5} 210 200)`} />
-        ))}
-      </g>
+      <circle cx="70" cy="9" r="3" fill="var(--castagno)" fillOpacity="0.5" />
+      <path d={CRINALE} fill="none" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
     </motion.svg>
   )
 }

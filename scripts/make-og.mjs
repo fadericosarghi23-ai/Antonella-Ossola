@@ -18,7 +18,7 @@ await sharp(hero)
   .resize(1200, 630, { fit: 'cover', position: 'top' })
   .composite([
     { input: overlay },
-    { input: await sharp(mark).resize(72, 72).png().toBuffer(), left: 80, top: 70 },
+    { input: await sharp(mark).resize(72, 72).png().toBuffer(), left: 80, top: 66 },
   ])
   .jpeg({ quality: 82 })
   .toFile('public/og-image.jpg')

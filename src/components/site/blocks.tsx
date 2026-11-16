@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Photo } from '@/components/site/Photo'
-import { DrawRings, Reveal, RevealImage } from '@/components/site/Reveal'
+import { DrawCrinale, Reveal, RevealImage } from '@/components/site/Reveal'
+import { photos } from '@/lib/photos'
 import type { PhotoSrc } from '@/lib/photos'
 import { cn } from '@/lib/utils'
 
@@ -60,8 +61,10 @@ export function CtaBand({
 }) {
   return (
     <section className="container-site">
-      <Reveal className="relative overflow-hidden rounded-3xl bg-bosco px-6 py-12 text-carta sm:px-12 md:py-16">
-        <DrawRings className="absolute -right-24 -bottom-24 size-[26rem] text-carta/15 md:-right-10" />
+      <Reveal className="relative isolate overflow-hidden rounded-[2rem] bg-bosco px-6 py-14 text-carta sm:px-12 md:py-20">
+        <Photo photo={photos.nebbiaAbeti} sizes="(min-width: 1152px) 1152px, 100vw" className="absolute inset-0 -z-20 h-full w-full bg-bosco" imgClassName="object-[50%_65%]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-bosco via-bosco/85 to-bosco/25" />
+        <DrawCrinale className="absolute right-6 bottom-6 hidden w-56 text-carta/70 md:block" />
         <div className="relative max-w-2xl">
           <h2 className="text-4xl leading-[1.08] md:text-5xl" data-placeholder="">
             {title}

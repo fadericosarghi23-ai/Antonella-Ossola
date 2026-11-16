@@ -50,16 +50,25 @@ Ogni file adattato porta in testa l'autore originale e cosa è cambiato.
 
 Costruiti a mano perché nel catalogo non c'era niente di adatto: hero con curve di livello (`ContourLines.tsx`), carta dei luoghi (`LuoghiMap.tsx`), lista d'attesa (`pages/Date.tsx`, il Waitlist Form del catalogo è stato scartato per blur sul testo e coriandoli).
 
+## Identità
+
+Logo: la sagoma reale del Campo dei Fiori vista da Varese, ricavata dai dati altimetrici (`src/components/brand/Logo.tsx`, costante `CRINALE`), con il sole color castagno. Lo stesso crinale torna come motivo nella Home, nella fascia finale, nei segnaposto foto e nell'intestazione di Contatti.
+
 ## Movimento
 
-- Hero: sei curve di livello si tracciano una volta (800ms, 80ms tra una e l'altra); la foto scende più lenta della pagina (unico effetto di scroll della Home). Le curve sono l'unico effetto attivo anche su mobile.
-- Entrate allo scroll su tutte le pagine (`src/components/site/Reveal.tsx`): opacità e 16px di spostamento, 600ms, una sola volta, cascata di 80ms su massimo sei elementi. Le foto rientrano anche di scala dentro la cornice. I titoli entrano come blocco col loro testo; il testo sopra la piega è fermo e leggibile al primo frame.
-- Fascia finale: le curve decorative si tracciano all'ingresso.
-- Camminate di ascolto: la linea della timeline segue lo scroll (unico effetto di scroll della pagina).
-- Chi sono: la foto si apre con una maschera legata allo scroll (solo l'immagine).
-- Luoghi: al clic su un luogo la foto si apre con una maschera (600ms); galleria con ingrandimento condiviso al clic.
-- Tutto il resto è risposta (hover, focus, apertura menu e accordion) o orientamento (dissolvenza di 200ms tra pagine, header che si compatta).
-- Con `prefers-reduced-motion` tutto si ferma e il contenuto resta completo. Sotto i 768px restano solo le curve dell'hero.
+Tutto rispetta: testo fermo e leggibile dal primo frame, risposte entro 200ms, entrate e transizioni entro 600ms, 800ms solo per i momenti d'autore, un solo effetto legato allo scroll per pagina, scroll nativo. Con `prefers-reduced-motion` tutto è fermo e completo; sotto i 768px restano solo il momento dell'hero e le risposte.
+
+- **Entrate** (`src/components/site/Reveal.tsx` + `index.css`): in CSS, opacità e 16px, 600ms, una volta, cascata di 80ms su massimo sei elementi; rete di sicurezza dopo 2,5s, così il contenuto non resta mai nascosto.
+- **Home**: le foto del collage si aprono con una maschera (800ms, 120ms tra una e l'altra) e il crinale si traccia sotto il titolo; la foto principale scende più lenta della pagina; l'anteprima dei percorsi cambia foto con la voce aperta.
+- **Luoghi**: rilievo 3D reale (three.js caricato a parte, solo desktop con WebGL), trascinamento o frecce per ruotare, lo scroll fa girare il punto di vista; altrove immagine statica `src/assets/terrain/rilievo-statico.webp`.
+- **Chi sono**: profilo altimetrico del Sentiero Italia che si disegna con lo scroll.
+- **Camminate di ascolto**: linea della timeline che segue lo scroll.
+- **Giornate e ritiri**: il sole attraversa l'arco mentre si scorre il programma.
+- **Percorsi, Percorsi individuali, Date**: parallasse leggera sulle foto. **Contatti**: crinale che scorre nell'intestazione.
+- **Gallerie**: apertura a schermo intero con scorrimento (frecce, tastiera, trascinamento).
+- **Risposte e orientamento**: focus da tastiera castagno su link e card, menu mobile animato in apertura e chiusura, header che si compatta senza spostare il contenuto, dissolvenza con lieve salita tra le pagine, foto che compaiono quando sono caricate.
+
+Dati del rilievo e del profilo: `node scripts/make-terrain.mjs` (Terrain Tiles, Mapzen e AWS Open Data, SRTM). Il profilo è indicativo: linea retta tra le località, non il tracciato GPS.
 
 ## Segnaposto da sostituire
 
@@ -70,7 +79,7 @@ Nel codice: commenti `[SEGNAPOSTO]`, componente `<Ph>` e attributo `data-placeho
 - **Offerta**: nomi, formati, durate, dimensione dei gruppi, difficoltà, stagioni, quote dei tre percorsi; programma della giornata; contenuto dello zaino; domande frequenti; tabella di confronto.
 - **Testi**: hero, "L'idea", "Come si comincia", tutte le descrizioni dei percorsi, testi di Chi sono (formazione, ruolo nel CAI), testi dei luoghi, footer.
 - **Date**: "Le prime uscite partono nel 2027" da confermare.
-- **Foto**: tutte provvisorie da Unsplash (crediti in `public/crediti-foto.txt`). Manca il ritratto di Antonella.
+- **Foto**: tutte provvisorie da Unsplash (crediti in `public/crediti-foto.txt`). Il ritratto di Antonella (Chi sono) è un segnaposto dichiarato, 4:5. Le gallerie delle pagine percorso andranno riempite con foto delle uscite.
 - **Luoghi**: quelli citati da Antonella nell'intervista a Il Giorno (17 maggio 2020); vanno confermati come mete reali.
 - **Citazioni**: due frasi di Antonella dalla stessa intervista; chiederle se vanno bene.
 - **Dati strutturati** (`pages/Home.tsx` e pagine percorso): qualifica professionale.

@@ -1,5 +1,6 @@
 import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react'
 import { cn } from '@/lib/utils'
+import { CRINALE } from '@/components/brand/Logo'
 
 /*
   Entrate allo scroll, in CSS (non dipendono da requestAnimationFrame):
@@ -77,26 +78,14 @@ export function RevealImage({ children, className, delay = 0 }: { children: Reac
   )
 }
 
-/** Curve di livello decorative che si tracciano all'ingresso (fascia finale). Solo SVG, mai testo. */
-export function DrawRings({ className }: { className?: string }) {
+/** Il crinale del marchio che si traccia all'ingresso (fascia finale). Solo SVG, mai testo. */
+export function DrawCrinale({ className }: { className?: string }) {
   const ref = useReveal<HTMLDivElement>()
   return (
     <div ref={ref} data-reveal-draw="" className={className} aria-hidden="true">
-      <svg viewBox="0 0 400 400" className="h-full w-full">
-        <g fill="none" stroke="currentColor" strokeWidth="1.2">
-          {[0, 1, 2, 3, 4, 5].map((i) => (
-            <ellipse
-              key={i}
-              pathLength={1}
-              cx="210"
-              cy="200"
-              rx={190 - i * 30}
-              ry={160 - i * 25}
-              transform={`rotate(${-12 + i * 4} 210 200)`}
-              style={{ '--draw-delay': `${stagger(i)}s` } as CSSProperties}
-            />
-          ))}
-        </g>
+      <svg viewBox="0 0 92 44" className="h-auto w-full">
+        <circle cx="70" cy="9" r="3.6" fill="var(--castagno)" />
+        <path d={CRINALE} pathLength={1} fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </div>
   )

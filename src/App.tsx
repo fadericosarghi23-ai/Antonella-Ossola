@@ -64,7 +64,7 @@ export default function App() {
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: reduce ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Suspense fallback={<div className="min-h-[70svh]" />}>
+          <Suspense fallback={<div className="min-h-[100svh]" />}>
           <Routes location={location}>
             <Route path="/" element={<Home />} />
             <Route path="/percorsi" element={<Percorsi />} />
