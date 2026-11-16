@@ -13,6 +13,16 @@ import { nav, percorsi } from '@/lib/site';
 
 export function Header() {
 	const [open, setOpen] = React.useState(false);
+	// resta montato 200ms dopo la chiusura, per l'animazione di uscita
+	const [mounted, setMounted] = React.useState(false);
+	React.useEffect(() => {
+		if (open) {
+			setMounted(true);
+			return;
+		}
+		const t = window.setTimeout(() => setMounted(false), 200);
+		return () => window.clearTimeout(t);
+	}, [open]);
 	const scrolled = useScroll(10);
 	const { pathname } = useLocation();
 
@@ -57,7 +67,7 @@ export function Header() {
 					},
 				)}
 			>
-				<Link to="/" aria-label="Antonella Ossola, home" className="rounded-md">
+				<Link to="/" aria-label="Antonella Ossola, home" className="group/logo rounded-md">
 					<Logo compact={scrolled} />
 				</Link>
 				<div className="hidden items-center gap-1 md:flex">
@@ -87,15 +97,16 @@ export function Header() {
 			<div
 				id="menu-mobile"
 				className={cn(
-					'bg-background fixed top-16 right-0 bottom-0 left-0 z-50 flex flex-col overflow-y-auto border-y md:hidden',
-					open ? 'block' : 'hidden',
+					'fixed top-16 right-0 bottom-0 left-0 z-50 flex flex-col overflow-y-auto md:hidden',
+					open || mounted ? 'block' : 'hidden',
+					!open && 'pointer-events-none',
 				)}
 			>
 				<div
 					data-slot={open ? 'open' : 'closed'}
 					className={cn(
-						'data-[slot=open]:animate-in data-[slot=open]:fade-in-0 data-[slot=open]:slide-in-from-top-2 ease-out duration-200',
-						'flex min-h-full w-full flex-col justify-between gap-y-8 p-4 pb-8',
+						'data-[slot=open]:animate-in data-[slot=open]:fade-in-0 data-[slot=open]:slide-in-from-top-2 data-[slot=closed]:animate-out data-[slot=closed]:fade-out-0 data-[slot=closed]:slide-out-to-top-2 data-[slot=closed]:fill-mode-forwards ease-out duration-200',
+						'flex min-h-full w-full flex-col justify-between gap-y-8 border-y bg-background p-4 pb-8',
 					)}
 				>
 					<div className="grid gap-y-1">

@@ -59,10 +59,10 @@ export default function App() {
         <motion.main
           id="contenuto"
           key={location.pathname}
-          initial={first.current ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: reduce ? 0 : 0.2, ease: 'easeOut' }}
+          initial={first.current ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: reduce ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
           <Suspense fallback={<div className="min-h-[70svh]" />}>
           <Routes location={location}>

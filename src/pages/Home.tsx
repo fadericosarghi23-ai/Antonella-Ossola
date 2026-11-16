@@ -60,7 +60,9 @@ function HeroPhoto({ target }: { target: React.RefObject<HTMLElement | null> }) 
   const still = reduce || !desktop
   return (
     <motion.div className="absolute inset-0 -z-10" style={still ? undefined : { y, scale: 1.08 }}>
-      <Photo photo={photos.hero} priority className="h-full w-full" imgClassName="object-[62%_60%] md:object-[50%_35%]" />
+      <div className="hero-foto h-full w-full">
+        <Photo photo={photos.hero} priority className="h-full w-full bg-carta" imgClassName="object-[62%_60%] md:object-[50%_35%]" />
+      </div>
     </motion.div>
   )
 }
@@ -179,10 +181,10 @@ export default function Home() {
                     photo={l.photo}
                     sizes="(min-width: 640px) 33vw, 100vw"
                     className="h-full w-full"
-                    imgClassName="transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                    imgClassName="transition-transform duration-200 ease-out group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
                   />
                 </RevealImage>
-                <h3 className="mt-4 text-2xl transition-colors duration-150 group-hover:text-castagno">{l.nome}</h3>
+                <h3 className="mt-4 text-2xl transition-colors duration-150 group-hover:text-castagno group-focus-visible:text-castagno">{l.nome}</h3>
                 <p className="text-sm text-muted-foreground">{l.nota}</p>
               </Link>
             </Reveal>

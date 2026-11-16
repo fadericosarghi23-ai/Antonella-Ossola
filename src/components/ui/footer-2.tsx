@@ -50,7 +50,7 @@ export function Footer2() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {item.links.map((link) => (
                   <li key={link.label}>
-                    <Link to={link.href} className="transition-colors duration-150 hover:text-bosco">
+                    <Link to={link.href} className="link-quiet">
                       {link.label}
                     </Link>
                   </li>

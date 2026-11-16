@@ -67,11 +67,11 @@ export default function Percorsi() {
                   photo={foto[p.slug as keyof typeof foto]}
                   sizes="(min-width: 768px) 33vw, 100vw"
                   className="h-full w-full"
-                  imgClassName="transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                  imgClassName="transition-transform duration-200 ease-out group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
                 />
               </RevealImage>
               <p className="kicker mt-5">{p.sottotitolo}</p>
-              <h2 className="mt-2 text-3xl transition-colors duration-150 group-hover:text-castagno">{p.nome}</h2>
+              <h2 className="mt-2 text-3xl transition-colors duration-150 group-hover:text-castagno group-focus-visible:text-castagno">{p.nome}</h2>
               <Ph as="p" className="mt-2 text-muted-foreground">
                 {p.breve}
               </Ph>

@@ -99,6 +99,13 @@
   p {
     text-wrap: pretty;
   }
+  a:focus-visible,
+  [role='button']:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--castagno);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+  }
   ::selection {
     background: var(--castagno);
     color: var(--primary-foreground);
@@ -117,7 +124,11 @@
     @apply text-[0.75rem] font-medium uppercase tracking-[0.14em] text-muschio-scuro;
   }
   .link-underline {
-    @apply underline decoration-castagno/40 underline-offset-4 transition-colors duration-150 hover:decoration-castagno;
+    @apply underline decoration-castagno/40 underline-offset-4 transition-[color,text-decoration-color,text-underline-offset] duration-150 hover:text-castagno hover:decoration-castagno hover:underline-offset-[6px];
+  }
+  /* Link del footer e voci secondarie: sottolineatura che compare al passaggio (150ms) */
+  .link-quiet {
+    @apply decoration-castagno/50 underline-offset-4 transition-colors duration-150 hover:text-bosco hover:underline focus-visible:text-bosco focus-visible:underline;
   }
 }
 
@@ -157,6 +168,26 @@ html.show-placeholders [data-placeholder] {
   }
   html.reveal-ready [data-reveal-draw]:not(.is-in) ellipse {
     stroke-dashoffset: 1;
+  }
+}
+
+/* Momento dell'hero, foto: entra con dissolvenza e rientro di scala (800ms, solo immagine) */
+@keyframes hero-foto {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-foto {
+  animation: hero-foto 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-foto {
+    animation: none;
   }
 }
 

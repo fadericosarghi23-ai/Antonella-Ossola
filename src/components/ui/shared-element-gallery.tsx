@@ -90,6 +90,7 @@ export function GalleryImage({
   className?: string
 }) {
   const context = React.useContext(GalleryContext)
+  const [loaded, setLoaded] = React.useState(false)
   if (!context) throw new Error("GalleryImage must be used within a Gallery")
 
   return (
@@ -112,7 +113,14 @@ export function GalleryImage({
         height={height}
         loading="lazy"
         decoding="async"
-        className="h-auto w-full rounded-xl object-cover"
+        onLoad={() => setLoaded(true)}
+        ref={(el: HTMLImageElement | null) => {
+          if (el?.complete) setLoaded(true)
+        }}
+        className={cn(
+          "h-auto w-full rounded-xl bg-pietra object-cover transition-opacity duration-300 ease-out",
+          loaded ? "opacity-100" : "opacity-0"
+        )}
         variants={{
           hover: { scale: 0.98 },
           tap: { scale: 0.95 },

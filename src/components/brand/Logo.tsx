@@ -23,7 +23,12 @@ export function LogoMark({ className, title }: { className?: string; title?: str
 export function Logo({ className, compact = false }: { className?: string; compact?: boolean }) {
   return (
     <span className={cn('inline-flex items-center gap-2.5 text-bosco', className)}>
-      <LogoMark className={compact ? 'size-8' : 'size-9'} />
+      <LogoMark
+        className={cn(
+          compact ? 'size-8' : 'size-9',
+          'transition-transform duration-200 ease-out group-hover/logo:-rotate-12 group-focus-visible/logo:-rotate-12',
+        )}
+      />
       <span className="flex flex-col leading-none">
         <span className="font-display text-[1.2rem] tracking-[-0.01em]">Antonella Ossola</span>
         {!compact && (
